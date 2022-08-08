@@ -21,32 +21,45 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
-#ifndef DISPATCHER_H
-#define DISPATCHER_H
+
+#ifndef COMMAND_REPOSITORY_H
+#define COMMAND_REPOSITORY_H
+
+#include"Command.h"
 #include<string>
-#include"UserInterface.h"
+#include<set>
+
+using std::string;
+using std::set;
+
 namespace controller
 {
-	class Dispatcher
+	class CommandRegistry
 	{
 	public:
-		explicit Dispatcher(view::UserInterface&ui);
-		Dispatcher() = default;
-		~Dispatcher();
+		static CommandRegistry& getInstance();
+		void addCommand(const string name, CommandPtr cmd);
+		CommandPtr removeCommand(const string name);
 
-		void onCommandEntered(const std::string& command);
+		size_t count();
+		CommandPtr getCommandByName(const string& name)const;
+		set<string>& getAllCommandNames()const;
 	private:
-		class DispatcherImpl;
-		std::unique_ptr<DispatcherImpl> pImpl;
+		CommandRegistry();			// { pImpl = std::make_unique<CommandRegistry>(); }
+		~CommandRegistry();
+
+		class CommandRegistryImpl;
+		std::unique_ptr< CommandRegistryImpl> pImpl;
 
 	private:
 		// not needed
-		Dispatcher(const Dispatcher&) = delete;
-		Dispatcher(Dispatcher&&) = delete;
-		Dispatcher& operator=(const Dispatcher&) = delete;
-		Dispatcher& operator=(Dispatcher&&) = delete;
+		CommandRegistry(CommandRegistry&) = delete;
+		CommandRegistry(CommandRegistry&&) = delete;
+		CommandRegistry& operator=(CommandRegistry&) = delete;
+		CommandRegistry& operator=(CommandRegistry&&) = delete;
+
 	};
 }
-#endif // !DISPATCHER_H
+#endif // !COMMAND_REPOSITORY_H
 
 

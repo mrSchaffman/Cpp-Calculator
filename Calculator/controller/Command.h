@@ -47,7 +47,7 @@ namespace controller
 
 		virtual void release() { delete this; }
 	protected:
-		// to be used by the subclasses
+		// to be use by the subclasses
 		Command() = default;
 		Command(const Command&) = default;
 
@@ -71,7 +71,7 @@ namespace controller
 	// helper
 	inline void commandDeleter(Command*p) { p->release(); }
 	using CommandPtr = std::unique_ptr<Command, decltype(&commandDeleter)>;
-	inline auto make_command_ptr(Command* p){	return CommandPtr{ p, &commandDeleter };}
+	inline auto make_command_ptr(Command* p) { return CommandPtr{ p, &commandDeleter }; }
 	
 	template<typename T, typename...Args>
 	auto make_command_ptr(Args&&...args) 
