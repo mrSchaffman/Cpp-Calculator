@@ -36,7 +36,7 @@ namespace controller
 	private:
 		double binaryOperation(double d1, double d2)noexcept { return d1 + d2; }
 		PlusCommand*cloneImpl()const noexcept override { return new PlusCommand{ *this }; }
-		const char* getHelpImpl() noexcept override{ return "Add the top must numbers on the stack!"; }
+		const char* getHelpImpl()const noexcept override{ return "Add the top must numbers on the stack!"; }
 
 	};
 }

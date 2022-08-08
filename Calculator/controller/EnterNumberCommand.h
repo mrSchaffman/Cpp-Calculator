@@ -39,7 +39,7 @@ namespace controller
 	private:
 		void undoImpl()override { model::Stack::getInstance().pop(true); }
 		Command*cloneImpl()const override { return new EnterNumberCommand{ *this }; }
-		const char* getHelpImpl() override
+		const char* getHelpImpl()const override
 		{
 			return "Press enter to execute one operation!";
 		}

@@ -23,23 +23,23 @@
 */
 #ifndef POWER_COMMAND_H
 #define POWER_COMMAND_H
-#include"UnaryCommand.h"
+#include"BinaryCommand.h"
 namespace controller
 {
-	class PowerCommand : public UnaryCommand
+	class PowerCommand : public BinaryCommand
 	{
 	public:
 		PowerCommand() = default;
 		~PowerCommand() = default;
-		explicit PowerCommand(const PowerCommand&cmd) :UnaryCommand(cmd) {}
+		explicit PowerCommand(const PowerCommand&cmd) :BinaryCommand(cmd) {}
 
-		double unaryOperation(double d)noexcept override { return std::tan(d); }
+		double binaryOperation(double d1,double d2)noexcept override { return std::pow(d1,d2); }
 
 	private:
 		PowerCommand*cloneImpl()const noexcept override { return new PowerCommand{ *this }; }
 		const char* getHelpImpl() noexcept override
 		{
-			return "Replace the top must elemet with it cosine: tan(x). x must be in radian!";
+			return "Replace the top must elemet with the power: x^y !";
 		}
 
 	private:

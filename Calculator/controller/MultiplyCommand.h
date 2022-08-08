@@ -38,7 +38,7 @@ namespace controller
 	private:
 		double binaryOperation(double d1, double d2)noexcept { return d1 * d2; }
 		MultiplyCommand*cloneImpl()const noexcept override{ return new MultiplyCommand{ *this }; }
-		const char* getHelpImpl() noexcept override{ return "Multiply the top most numbers on the stack!"; }
+		const char* getHelpImpl()const noexcept override{ return "Multiply the top most numbers on the stack!"; }
 	};
 }
 #endif // !MULTIPLY_COMMAND_H

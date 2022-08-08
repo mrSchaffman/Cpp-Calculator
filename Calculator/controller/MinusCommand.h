@@ -36,7 +36,7 @@ namespace controller
 	private:
 		double binaryOperation(double d1, double d2)noexcept { return d1 - d2; }
 		MinusCommand*cloneImpl()const noexcept override { return new MinusCommand{ *this }; }
-		const char* getHelpImpl()noexcept override { return "Subtract the top must numbers on the stack!"; }
+		const char* getHelpImpl()const noexcept override { return "Subtract the top must numbers on the stack!"; }
 	};
 }
 #endif // !MINUS_COMMAND_H

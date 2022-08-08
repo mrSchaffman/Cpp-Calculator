@@ -43,7 +43,7 @@ namespace controller
 		}
 		double binaryOperation(double d1, double d2)noexcept { return d1 / d2; }
 		DivideCommand*cloneImpl()const noexcept override { return new DivideCommand{ *this }; }
-		const char* getHelpImpl()noexcept override{ return "Divide the next top element by the top most numbers on the stack!"; }
+		const char* getHelpImpl()const noexcept override{ return "Divide the next top element by the top most numbers on the stack!"; }
 	};
 }
 #endif // !DIVIDE_COMMAND_H

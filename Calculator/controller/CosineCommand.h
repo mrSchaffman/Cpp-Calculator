@@ -37,7 +37,7 @@ namespace controller
 
 	private:
 		CosineCommand*cloneImpl()const noexcept override { return new CosineCommand{ *this }; }
-		const char* getHelpImpl() noexceptoverride
+		const char* getHelpImpl()const noexcept override
 		{ 
 			return "Replace the top must elemet with it cosine: cos(x). x must be in radian!"; 
 		}

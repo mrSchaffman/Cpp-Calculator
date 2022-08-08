@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BinaryCommand.cpp" />
+    <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandRegistry.cpp" />
     <ClCompile Include="Dispatcher.cpp" />
     <ClCompile Include="DivideCommand.cpp" />

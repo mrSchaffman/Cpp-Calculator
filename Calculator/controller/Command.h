@@ -36,19 +36,14 @@ namespace controller
 	{
 	public:
 		virtual~Command() = default;
-		void execute() 
-		{ 
-			checkPreCondition();
-			executeImpl();
-			checkPostCondition();
-		}
-		void undo() { undoImpl(); }
-		const char* getHelp() { return getHelpImpl(); }
+		void execute();
+		void undo();
+		const char* getHelp()const;
 
 		// prototype pattern
-		Command*clone()const { return cloneImpl(); }
+		Command*clone()const;
 
-		virtual void release() { delete this; }
+		virtual void release();
 	protected:
 		// to be use by the subclasses
 		Command() = default;
@@ -58,7 +53,7 @@ namespace controller
 		virtual void executeImpl()noexcept =0;
 		virtual void undoImpl()noexcept = 0;
 		virtual Command*cloneImpl()const noexcept = 0;
-		virtual const char* getHelpImpl()noexcept = 0;
+		virtual const char* getHelpImpl()const noexcept = 0;
 
 		// concrete command shoul override this function if needed.
 		virtual void checkPreCondition()const {}

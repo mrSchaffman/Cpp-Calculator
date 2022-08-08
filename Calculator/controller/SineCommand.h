@@ -37,7 +37,7 @@ namespace controller
 
 	private:
 		SineCommand*cloneImpl()const noexcept override { return new SineCommand{ *this }; }
-		const char* getHelpImpl() noexcept override
+		const char* getHelpImpl()const noexcept override
 		{
 			return "Replace the top must elemet with it cosine: sin(x). x must be in radian!";
 		}
