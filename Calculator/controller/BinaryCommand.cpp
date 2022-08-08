@@ -1,4 +1,3 @@
-#pragma once
 /*
 	Copyright (C) 2022  Barth.Feudong
 	Author can be contacted here: <https://github.com/mrSchaffman/Cpp-Calculator>
@@ -22,31 +21,28 @@
 
 */
 
-#ifndef UNARY_COMMAND_H
-#define UNARY_COMMAND_H
-#include"Command.h"
+#include "BinaryCommand.h"
+#include"Exception.h"
+#include"Stack.h"
 namespace controller
 {
-	// abstract unary Command
-	class UnaryCommand : public Command
+	void BinaryCommand::checkPreCondition() const
 	{
-	public:
-		UnaryCommand(const UnaryCommand&cmd) :Command(cmd), m_state{ cmd.m_state }{}
-		virtual~UnaryCommand() = default;
-	protected:
-		virtual void checkPreCondition()const;
-		virtual void checkPostCondition()const{}
+		if (model::Stack::getInstance().size() < 2)
+			throw utility::Exception("The Model Stack must have at least two elements!");
+	}
+	void BinaryCommand::executeImpl()
+	{
+		m_state1 = model::Stack::getInstance().pop(true);
+		m_state2 = model::Stack::getInstance().pop(true);
+		model::Stack::getInstance().push(binaryOperation(m_state2, m_state1));
+	}
+	void BinaryCommand::undoImpl()
+	{
+		model::Stack::getInstance().pop();
 
-	private:		// unary operation
-		virtual double unaryOperation(double)noexcept = 0;
-	private:		// inherited from Command base class
-		virtual void executeImpl()override;
-		virtual void undoImpl()override;
+		model::Stack::getInstance().push(m_state2);
+		model::Stack::getInstance().push(m_state1);
 
-	private:
-		double m_state;
-	};
+	}
 }
-#endif // !UNARY_COMMAND_H
-
-

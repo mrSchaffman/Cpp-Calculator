@@ -22,31 +22,32 @@
 
 */
 
-#ifndef UNARY_COMMAND_H
-#define UNARY_COMMAND_H
+#ifndef BINARY_COMMAND_H
+#define BINARY_COMMAND_H
 #include"Command.h"
 namespace controller
 {
-	// abstract unary Command
-	class UnaryCommand : public Command
+	class BinaryCommand : public Command
 	{
 	public:
-		UnaryCommand(const UnaryCommand&cmd) :Command(cmd), m_state{ cmd.m_state }{}
-		virtual~UnaryCommand() = default;
+		BinaryCommand(const BinaryCommand&cmd) :Command(cmd), m_state1{ cmd.m_state1 },m_state2{ cmd.m_state2 }{}
+		virtual~BinaryCommand() = default;
 	protected:
 		virtual void checkPreCondition()const;
-		virtual void checkPostCondition()const{}
+		virtual void checkPostCondition()const {}
 
 	private:		// unary operation
-		virtual double unaryOperation(double)noexcept = 0;
+		virtual double binaryOperation(double,double)noexcept = 0;
 	private:		// inherited from Command base class
 		virtual void executeImpl()override;
 		virtual void undoImpl()override;
 
 	private:
-		double m_state;
+		double m_state1;
+		double m_state2;
+
 	};
 }
-#endif // !UNARY_COMMAND_H
+#endif // !BINARY_COMMAND_H
 
 
