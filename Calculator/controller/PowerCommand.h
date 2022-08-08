@@ -36,8 +36,8 @@ namespace controller
 		double unaryOperation(double d)noexcept override { return std::tan(d); }
 
 	private:
-		Command*cloneImpl()const override { return new PowerCommand{ *this }; }
-		const char* getHelpImpl() override
+		PowerCommand*cloneImpl()const noexcept override { return new PowerCommand{ *this }; }
+		const char* getHelpImpl() noexcept override
 		{
 			return "Replace the top must elemet with it cosine: tan(x). x must be in radian!";
 		}

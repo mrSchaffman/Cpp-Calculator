@@ -31,12 +31,12 @@ namespace controller
 		if (model::Stack::getInstance().size() < 1)
 			throw utility::Exception("The Model Stack must have at least one element!");
 	}
-	void UnaryCommand::executeImpl()
+	void UnaryCommand::executeImpl()noexcept
 	{
 		m_state = model::Stack::getInstance().pop(true);
 		model::Stack::getInstance().push(unaryOperation(m_state),true);
 	}
-	void UnaryCommand::undoImpl()
+	void UnaryCommand::undoImpl()noexcept
 	{
 		model::Stack::getInstance().pop(true);
 		model::Stack::getInstance().push(m_state);

@@ -58,7 +58,7 @@ namespace controller
 
 	void Dispatcher::DispatcherImpl::execute(const std::string & cmdName)
 	{
-		double d;
+		double d{};
 		if (cmdName == "help")
 			printHelp();
 		//else if (isDigit(cmd,d))
@@ -98,8 +98,8 @@ namespace controller
 		oss << "-----------------------------------\n"
 			<< "----undo: undo last operation.\n---"
 			<< "----redo: redo last operation.\n---";
-		set<string> cmdNames = CommandRegistry::getInstance().getAllCommandNames;
-		for (auto& name : cmdNames)
+		const set<string>& cmdNames = CommandRegistry::getInstance().getAllCommandNames();
+		for (const auto& name : cmdNames)
 			oss << "----" << CommandRegistry::getInstance().getCommandByName(name)->getHelp() << "---\n";
 
 		m_ui.updateDisplay(oss.str());

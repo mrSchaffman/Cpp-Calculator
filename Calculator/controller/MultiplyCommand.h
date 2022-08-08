@@ -21,33 +21,26 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
-#ifndef SINE_COMMAND_H
-#define SINE_COMMAND_H
-#include"UnaryCommand.h"
+
+#ifndef MULTIPLY_COMMAND_H
+#define MULTIPLY_COMMAND_H
+#include"BinaryCommand.h"
+#include"Stack.h"
+#include"Exception.h"
 namespace controller
 {
-	class SineCommand : public UnaryCommand
+	class MultiplyCommand : public BinaryCommand
 	{
 	public:
-		SineCommand() = default;
-		~SineCommand() = default;
-		explicit SineCommand(const SineCommand&cmd) :UnaryCommand(cmd) {}
-
-		double unaryOperation(double d)noexcept override { return std::sin(d); }
-
+		MultiplyCommand() = default;
+		~MultiplyCommand() = default;
+		explicit MultiplyCommand(const MultiplyCommand&cmd) :BinaryCommand(cmd) {}
 	private:
-		SineCommand*cloneImpl()const noexcept override { return new SineCommand{ *this }; }
-		const char* getHelpImpl() noexcept override
-		{
-			return "Replace the top must elemet with it cosine: sin(x). x must be in radian!";
-		}
-
-	private:
-		SineCommand(SineCommand&&) = delete;
-		SineCommand& operator=(const SineCommand&) = delete;
-		SineCommand& operator=(SineCommand&&) = delete;
+		double binaryOperation(double d1, double d2)noexcept { return d1 * d2; }
+		MultiplyCommand*cloneImpl()const noexcept override{ return new MultiplyCommand{ *this }; }
+		const char* getHelpImpl() noexcept override{ return "Multiply the top most numbers on the stack!"; }
 	};
-
 }
-#endif // !SINE_COMMAND_H
+#endif // !MULTIPLY_COMMAND_H
+
 

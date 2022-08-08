@@ -31,13 +31,13 @@ namespace controller
 		if (model::Stack::getInstance().size() < 2)
 			throw utility::Exception("The Model Stack must have at least two elements!");
 	}
-	void BinaryCommand::executeImpl()
+	void BinaryCommand::executeImpl() noexcept
 	{
 		m_state1 = model::Stack::getInstance().pop(true);
 		m_state2 = model::Stack::getInstance().pop(true);
 		model::Stack::getInstance().push(binaryOperation(m_state2, m_state1));
 	}
-	void BinaryCommand::undoImpl()
+	void BinaryCommand::undoImpl() noexcept
 	{
 		model::Stack::getInstance().pop();
 

@@ -43,8 +43,8 @@ namespace controller
 		virtual size_t getRedoSize()const = 0;
 
 	};
-	class Manager::ListStrategy : public Manager::ManagerImpl {}; // to do
-	class Manager::ListVectorStrategy : public Manager::ManagerImpl {}; // to do
+	//class Manager::ListStrategy : public Manager::ManagerImpl {}; // to do
+	//class Manager::ListVectorStrategy : public Manager::ManagerImpl {}; // to do
 	class Manager::StackStrategy : public Manager::ManagerImpl
 	{
 	public:
@@ -75,10 +75,10 @@ namespace controller
 			pImpl = std::make_unique<StackStrategy>();
 			break;
 		case controller::Manager::LIST_STRATEGY:
-			pImpl = std::make_unique<ListStrategy>();
+			//pImpl = std::make_unique<ListStrategy>();
 			break;
 		case controller::Manager::LIST_VECTOR_STRATEGY:
-			pImpl = std::make_unique<ListVectorStrategy>();
+			//pImpl = std::make_unique<ListVectorStrategy>();
 			break;
 		default:
 			break;

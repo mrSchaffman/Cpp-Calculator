@@ -39,8 +39,8 @@ namespace controller
 	private:		// unary operation
 		virtual double binaryOperation(double,double)noexcept = 0;
 	private:		// inherited from Command base class
-		virtual void executeImpl()override;
-		virtual void undoImpl()override;
+		virtual void executeImpl()noexcept override;
+		virtual void undoImpl()noexcept override;
 
 	private:
 		double m_state1;

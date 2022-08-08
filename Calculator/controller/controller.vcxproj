@@ -24,8 +24,12 @@
     <ClInclude Include="CommandRegistry.h" />
     <ClInclude Include="CosineCommand.h" />
     <ClInclude Include="Dispatcher.h" />
+    <ClInclude Include="DivideCommand.h" />
     <ClInclude Include="EnterNumberCommand.h" />
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="MinusCommand.h" />
+    <ClInclude Include="MultiplyCommand.h" />
+    <ClInclude Include="PlusCommand.h" />
     <ClInclude Include="PowerCommand.h" />
     <ClInclude Include="SineCommand.h" />
     <ClInclude Include="TangentCommand.h" />
@@ -35,7 +39,10 @@
     <ClCompile Include="BinaryCommand.cpp" />
     <ClCompile Include="CommandRegistry.cpp" />
     <ClCompile Include="Dispatcher.cpp" />
+    <ClCompile Include="DivideCommand.cpp" />
     <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="MinusCommand.cpp" />
+    <ClCompile Include="PlusCommand.cpp" />
     <ClCompile Include="UnaryCommand.cpp" />
   </ItemGroup>
   <ItemGroup>

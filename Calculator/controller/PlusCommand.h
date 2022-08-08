@@ -21,33 +21,25 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
-#ifndef SINE_COMMAND_H
-#define SINE_COMMAND_H
-#include"UnaryCommand.h"
+
+#ifndef PLUS_COMMAND_H
+#define PLUS_COMMAND_H
+#include"BinaryCommand.h"
 namespace controller
 {
-	class SineCommand : public UnaryCommand
+	class PlusCommand : public BinaryCommand
 	{
 	public:
-		SineCommand() = default;
-		~SineCommand() = default;
-		explicit SineCommand(const SineCommand&cmd) :UnaryCommand(cmd) {}
-
-		double unaryOperation(double d)noexcept override { return std::sin(d); }
-
+		PlusCommand() = default;
+		~PlusCommand() = default;
+		explicit PlusCommand(const PlusCommand&cmd):BinaryCommand(cmd){}
 	private:
-		SineCommand*cloneImpl()const noexcept override { return new SineCommand{ *this }; }
-		const char* getHelpImpl() noexcept override
-		{
-			return "Replace the top must elemet with it cosine: sin(x). x must be in radian!";
-		}
+		double binaryOperation(double d1, double d2)noexcept { return d1 + d2; }
+		PlusCommand*cloneImpl()const noexcept override { return new PlusCommand{ *this }; }
+		const char* getHelpImpl() noexcept override{ return "Add the top must numbers on the stack!"; }
 
-	private:
-		SineCommand(SineCommand&&) = delete;
-		SineCommand& operator=(const SineCommand&) = delete;
-		SineCommand& operator=(SineCommand&&) = delete;
 	};
-
 }
-#endif // !SINE_COMMAND_H
+#endif // !PLUS_COMMAND_H
+
 

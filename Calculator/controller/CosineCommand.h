@@ -36,8 +36,8 @@ namespace controller
 		double unaryOperation(double d)noexcept override { return std::cos(d); }
 
 	private:
-		Command*cloneImpl()const override { return new CosineCommand{ *this }; }
-		const char* getHelpImpl() override 
+		CosineCommand*cloneImpl()const noexcept override { return new CosineCommand{ *this }; }
+		const char* getHelpImpl() noexceptoverride
 		{ 
 			return "Replace the top must elemet with it cosine: cos(x). x must be in radian!"; 
 		}

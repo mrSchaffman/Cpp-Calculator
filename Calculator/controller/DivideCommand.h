@@ -21,33 +21,31 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
-#ifndef SINE_COMMAND_H
-#define SINE_COMMAND_H
-#include"UnaryCommand.h"
+
+#ifndef DIVIDE_COMMAND_H
+#define DIVIDE_COMMAND_H
+#include"BinaryCommand.h"
+#include"Stack.h"
+#include"Exception.h"
 namespace controller
 {
-	class SineCommand : public UnaryCommand
+	class DivideCommand : public BinaryCommand
 	{
 	public:
-		SineCommand() = default;
-		~SineCommand() = default;
-		explicit SineCommand(const SineCommand&cmd) :UnaryCommand(cmd) {}
-
-		double unaryOperation(double d)noexcept override { return std::sin(d); }
-
+		DivideCommand() = default;
+		~DivideCommand() = default;
+		explicit DivideCommand(const DivideCommand&cmd) :BinaryCommand(cmd) {}
 	private:
-		SineCommand*cloneImpl()const noexcept override { return new SineCommand{ *this }; }
-		const char* getHelpImpl() noexcept override
+		void checkPreCondition()const
 		{
-			return "Replace the top must elemet with it cosine: sin(x). x must be in radian!";
+			if (model::Stack::getInstance().top() == 0)
+				throw utility::Exception("The top most number must be != 0.0 ");
 		}
-
-	private:
-		SineCommand(SineCommand&&) = delete;
-		SineCommand& operator=(const SineCommand&) = delete;
-		SineCommand& operator=(SineCommand&&) = delete;
+		double binaryOperation(double d1, double d2)noexcept { return d1 / d2; }
+		DivideCommand*cloneImpl()const noexcept override { return new DivideCommand{ *this }; }
+		const char* getHelpImpl()noexcept override{ return "Divide the next top element by the top most numbers on the stack!"; }
 	};
-
 }
-#endif // !SINE_COMMAND_H
+#endif // !DIVIDE_COMMAND_H
+
 

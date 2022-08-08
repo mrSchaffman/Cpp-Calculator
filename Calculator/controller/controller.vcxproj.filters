@@ -48,6 +48,18 @@
     <ClInclude Include="BinaryCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlusCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MinusCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DivideCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplyCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dispatcher.cpp">
@@ -63,6 +75,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BinaryCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlusCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MinusCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DivideCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

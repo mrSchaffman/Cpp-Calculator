@@ -55,10 +55,10 @@ namespace controller
 		Command(const Command&) = default;
 
 	private:
-		virtual void executeImpl()=0;
-		virtual void undoImpl() = 0;
-		virtual Command*cloneImpl()const = 0;
-		virtual const char* getHelpImpl() = 0;
+		virtual void executeImpl()noexcept =0;
+		virtual void undoImpl()noexcept = 0;
+		virtual Command*cloneImpl()const noexcept = 0;
+		virtual const char* getHelpImpl()noexcept = 0;
 
 		// concrete command shoul override this function if needed.
 		virtual void checkPreCondition()const {}

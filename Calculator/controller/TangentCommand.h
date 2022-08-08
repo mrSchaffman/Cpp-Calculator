@@ -36,7 +36,7 @@ namespace controller
 		double unaryOperation(double d)noexcept override { return std::tan(d); }
 
 	private:
-		Command*cloneImpl()const override { return new TangentCommand{ *this }; }
+		TangentCommand*cloneImpl()const override { return new TangentCommand{ *this }; }
 		const char* getHelpImpl() override
 		{
 			return "Replace the top must elemet with it cosine: tan(x). x must be in radian!";
