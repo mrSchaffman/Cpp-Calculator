@@ -1,4 +1,3 @@
-#include "Dispatcher.h"
 /*
 	Copyright (C) 2022  Barth.Feudong
 	Author can be contacted here: <https://github.com/mrSchaffman/Cpp-Calculator>
@@ -22,6 +21,7 @@
 
 */
 
+#include "Dispatcher.h"
 #include"Command.h"
 #include"CommandRegistry.h"
 #include"Exception.h"
