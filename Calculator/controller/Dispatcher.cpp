@@ -24,6 +24,7 @@
 #include "Dispatcher.h"
 #include"Command.h"
 #include"CommandRegistry.h"
+#include"EnterNumberCommand.h"
 #include"Exception.h"
 #include"Manager.h"
 #include<regex>
@@ -61,8 +62,8 @@ namespace controller
 		double d{};
 		if (cmdName == "help")
 			printHelp();
-		//else if (isDigit(cmd,d))
-		//	// todo
+		else if (isDigit(cmdName,d))
+			m_manager.manageCommand(make_command_ptr<EnterNumberCommand>(d));
 		else if (cmdName == "undo")
 			m_manager.manageUndo();
 		else if (cmdName == "redo")

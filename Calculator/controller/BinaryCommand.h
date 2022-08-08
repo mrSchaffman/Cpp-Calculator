@@ -30,8 +30,11 @@ namespace controller
 	class BinaryCommand : public Command
 	{
 	public:
-		BinaryCommand(const BinaryCommand&cmd) :Command(cmd), m_state1{ cmd.m_state1 },m_state2{ cmd.m_state2 }{}
 		virtual~BinaryCommand() = default;
+	protected:
+		BinaryCommand() = default;
+		BinaryCommand(const BinaryCommand&cmd) :Command(cmd), m_state1{ cmd.m_state1 }, m_state2{ cmd.m_state2 }{}
+
 	protected:
 		virtual void checkPreCondition()const;
 		virtual void checkPostCondition()const {}

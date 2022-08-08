@@ -23,26 +23,27 @@
 */
 #ifndef ENTER_NUMBER_COMMAND_H
 #define ENTER_NUMBER_COMMAND_H
-#include"UnaryCommand.h"
+#include"Command.h"
 #include"Stack.h"
 namespace controller
 {
-	class EnterNumberCommand : public UnaryCommand
+	class EnterNumberCommand : public Command
 	{
 	public:
-		EnterNumberCommand() = default;
 		~EnterNumberCommand() = default;
-		explicit EnterNumberCommand(const EnterNumberCommand&cmd) :UnaryCommand(cmd) {}
-
-		double unaryOperation(double d)noexcept override { return std::tan(d); }
+		explicit EnterNumberCommand(double d) :Command{}, m_number{ d }{}
+		explicit EnterNumberCommand(const EnterNumberCommand&cmd) :Command(cmd), m_number{cmd.m_number}{}
 
 	private:
-		void undoImpl()override { model::Stack::getInstance().pop(true); }
-		Command*cloneImpl()const override { return new EnterNumberCommand{ *this }; }
-		const char* getHelpImpl()const override
+		void undoImpl() noexcept override { model::Stack::getInstance().pop(true); }
+		EnterNumberCommand*cloneImpl()const noexcept override { return new EnterNumberCommand{ *this }; }
+		const char* getHelpImpl()const noexcept override
 		{
 			return "Press enter to execute one operation!";
 		}
+		virtual void executeImpl()noexcept { model::Stack::getInstance().push(m_number); }
+
+		double m_number;
 
 	private:
 		EnterNumberCommand(EnterNumberCommand&&) = delete;

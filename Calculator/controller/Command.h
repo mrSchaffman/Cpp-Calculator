@@ -50,14 +50,14 @@ namespace controller
 		Command(const Command&) = default;
 
 	private:
-		virtual void executeImpl()noexcept =0;
-		virtual void undoImpl()noexcept = 0;
-		virtual Command*cloneImpl()const noexcept = 0;
-		virtual const char* getHelpImpl()const noexcept = 0;
-
 		// concrete command shoul override this function if needed.
 		virtual void checkPreCondition()const {}
 		virtual void checkPostCondition()const {}
+
+		virtual void executeImpl()noexcept = 0;
+		virtual void undoImpl()noexcept = 0;
+		virtual Command*cloneImpl()const noexcept = 0;
+		virtual const char* getHelpImpl()const noexcept = 0;
 
 	private:
 		// uneeded
@@ -66,19 +66,21 @@ namespace controller
 		Command& operator=(Command&&) = delete;
 	};
 
-	// helper
-	inline void commandDeleter(Command*p) { p->release(); }
+	// helpers
+	inline void commandDeleter(Command*p) { p->release(); return; }
+
 	using CommandPtr = unique_ptr<Command, decltype(&commandDeleter)>;
-	inline auto make_command_ptr(Command* p) { return CommandPtr{ p, &commandDeleter }; }
 	
-	template<typename T, typename...Args>
-	auto make_command_ptr(Args&&...args) 
+	template<typename T, typename... Args>
+	auto make_command_ptr(Args&&... args) 
 	{ 
 		return CommandPtr{ 
 			new T{std::forward<Args>(args)...}, 
 			&commandDeleter 
 		}; 
 	} // auto ptr = make_command_ptr<UserCommand>(a, b,c,g);
+
+	inline auto make_command_ptr(Command* p) { return CommandPtr{ p, &commandDeleter }; }
 
 }
 #endif // !COMMAND_H

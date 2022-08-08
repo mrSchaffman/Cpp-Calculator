@@ -31,8 +31,12 @@ namespace controller
 	class UnaryCommand : public Command
 	{
 	public:
-		UnaryCommand(const UnaryCommand&cmd) :Command(cmd), m_state{ cmd.m_state }{}
+		//UnaryCommand(const UnaryCommand&cmd) :Command(cmd), m_state{ cmd.m_state }{}
 		virtual~UnaryCommand() = default;
+	protected:
+		UnaryCommand() = default;
+		UnaryCommand(const UnaryCommand&cmd) :Command(cmd), m_state{ cmd.m_state }{}
+
 	protected:
 		virtual void checkPreCondition()const;
 		virtual void checkPostCondition()const{}
