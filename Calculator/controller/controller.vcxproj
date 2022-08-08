@@ -22,10 +22,12 @@
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandRegistry.h" />
     <ClInclude Include="Dispatcher.h" />
+    <ClInclude Include="Manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandRegistry.cpp" />
     <ClCompile Include="Dispatcher.cpp" />
+    <ClCompile Include="Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\utility\utility.vcxproj">
