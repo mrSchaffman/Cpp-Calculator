@@ -29,16 +29,32 @@ namespace controller
 {
 	class Manager
 	{
+		enum HistoryStrategy
+		{
+			STACK_STRATEGY,
+			LIST_STRATEGY,
+			LIST_VECTOR_STRATEGY
+		};
 	public:
-		Manager();
+		Manager(HistoryStrategy his = STACK_STRATEGY);
 		~Manager();
 
 		void manageCommand(CommandPtr cmd);
 		void manageUndo();
 		void manageRedo();
+
+		// usefull for feedback on the screen
+		size_t getUndoSize()const;
+		size_t getRedoSize()const;
+
 	private:
 		class ManagerImpl;
 		unique_ptr<ManagerImpl> pImpl;
+
+		// History Strategies
+		class StackStrategy;
+		class ListStrategy;
+		class ListVectorStrategy;
 	private:
 		Manager(Manager&) = delete;
 		Manager(Manager&&) = delete;
