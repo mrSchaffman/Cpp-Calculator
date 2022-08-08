@@ -4,7 +4,7 @@
 	Author can be contacted here: <https://github.com/mrSchaffman/Cpp-Calculator>
 
 	This file is part of the Calculator project.
-	using the COM, the win32 API for the GUI,
+	using the COM, the win32 API for the GUI, 
 	the MVC Architecture.
 
 	Calculator is free software: you can redistribute it and/or modify
@@ -22,33 +22,23 @@
 
 */
 
-#ifndef PUBLISHER_H
-#define PUBLISHER_H
-
+#ifndef EXEPTION_H
+#define EXEPTION_H
 #include<string>
-#include<memory>
+
+using std::string;
+
 namespace utility
 {
-	class Observer;
-	class EventData;
-
-	class Publisher
+	class Exception
 	{
 	public:
-		Publisher();
-		void subscribe(const std::string& eventName, std::unique_ptr<Observer> observer);
-		void unsubscribe(const std::string& eventName, const std::string& observerName);
-
-	protected:
-		~Publisher();
-
-		void notify(const std::string eventName, std::shared_ptr<EventData> data)const;
-		void registerEvent(const std::string&eventName);
-
+		Exception(const string& data):msg{ data }{}
+		const string& what()const { return msg; }
 	private:
-		class PublisherImpl;
-		std::unique_ptr<PublisherImpl> pImpl;
+		string msg;
 	};
 }
-#endif // !PUBLISHER_H
+#endif // !EXEPTION_H
+
 

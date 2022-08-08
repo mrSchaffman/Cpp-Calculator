@@ -22,33 +22,43 @@
 
 */
 
-#ifndef PUBLISHER_H
-#define PUBLISHER_H
-
+#ifndef TOKENIZER_H
+#define TOKENIZER_H
 #include<string>
-#include<memory>
+#include<vector>
+
 namespace utility
 {
-	class Observer;
-	class EventData;
+	using Token = std::string;
+	using Tokens = std::vector<Token>;
+	using const_iterator = Tokens::const_iterator;
 
-	class Publisher
+	class Tokenizer
 	{
 	public:
-		Publisher();
-		void subscribe(const std::string& eventName, std::unique_ptr<Observer> observer);
-		void unsubscribe(const std::string& eventName, const std::string& observerName);
+		explicit Tokenizer(const std::string&);
+		explicit Tokenizer(std::istream&);
+		~Tokenizer();
+		size_t count() { return m_tokens.size(); }
 
-	protected:
-		~Publisher();
+		// util for range for loop
+		const_iterator begin() { return m_tokens.begin(); }
+		const_iterator end() { return m_tokens.end(); }
 
-		void notify(const std::string eventName, std::shared_ptr<EventData> data)const;
-		void registerEvent(const std::string&eventName);
+		// random access iterator.
+		const Token& operator[](size_t i)const { return m_tokens[i]; }
 
 	private:
-		class PublisherImpl;
-		std::unique_ptr<PublisherImpl> pImpl;
+		Tokenizer() = delete;
+		Tokenizer(const Tokenizer&) = delete;
+		Tokenizer(Tokenizer&&) = delete;
+		Tokenizer& operator=(const Tokenizer&) = delete;
+		Tokenizer& operator=(Tokenizer&&) = delete;
+
+		void tokenize(std::istream&);
+		Tokens m_tokens;
 	};
 }
-#endif // !PUBLISHER_H
+#endif // !TOKENIZER_H
+
 

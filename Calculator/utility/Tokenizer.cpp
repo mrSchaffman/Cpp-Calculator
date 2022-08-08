@@ -1,4 +1,4 @@
-#pragma once
+#include "Tokenizer.h"
 /*
 	Copyright (C) 2022  Barth.Feudong
 	Author can be contacted here: <https://github.com/mrSchaffman/Cpp-Calculator>
@@ -21,34 +21,38 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
+#include<sstream>
+#include<iterator>
+#include<algorithm>
 
-#ifndef PUBLISHER_H
-#define PUBLISHER_H
+using std::string;
+using std::istream;
+using std::istream_iterator;
 
-#include<string>
-#include<memory>
 namespace utility
 {
-	class Observer;
-	class EventData;
-
-	class Publisher
+	Tokenizer::Tokenizer(const string & s)
 	{
-	public:
-		Publisher();
-		void subscribe(const std::string& eventName, std::unique_ptr<Observer> observer);
-		void unsubscribe(const std::string& eventName, const std::string& observerName);
+		std::istringstream iss{ s };
+		tokenize(iss);
+	}
 
-	protected:
-		~Publisher();
+	Tokenizer::Tokenizer(istream & s)
+	{
+		tokenize(s);
+	}
 
-		void notify(const std::string eventName, std::shared_ptr<EventData> data)const;
-		void registerEvent(const std::string&eventName);
+	Tokenizer::~Tokenizer()
+	{
+	}
 
-	private:
-		class PublisherImpl;
-		std::unique_ptr<PublisherImpl> pImpl;
-	};
+	void Tokenizer::tokenize(istream &s)
+	{
+		m_tokens.assign(istream_iterator<string>{s}, istream_iterator<string>{});
+
+		// for each char in the token , to lower
+		for (auto& token : m_tokens)
+			std::transform(token.begin(), token.end(), token.begin(), ::tolower);
+	}
+
 }
-#endif // !PUBLISHER_H
-

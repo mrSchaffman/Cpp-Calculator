@@ -22,33 +22,29 @@
 
 */
 
-#ifndef PUBLISHER_H
-#define PUBLISHER_H
+#ifndef OBSERVER_H
+#define OBSERVER_H
 
 #include<string>
-#include<memory>
 namespace utility
 {
-	class Observer;
 	class EventData;
 
-	class Publisher
+	class Observer
 	{
 	public:
-		Publisher();
-		void subscribe(const std::string& eventName, std::unique_ptr<Observer> observer);
-		void unsubscribe(const std::string& eventName, const std::string& observerName);
-
-	protected:
-		~Publisher();
-
-		void notify(const std::string eventName, std::shared_ptr<EventData> data)const;
-		void registerEvent(const std::string&eventName);
-
+		Observer(const std::string & n) :name{ n } {}
+		virtual~Observer() = default;
+		const std::string & getName()const { return name; }
+		void notify(std::shared_ptr<EventData> data) { notifyImpl(data); }
 	private:
-		class PublisherImpl;
-		std::unique_ptr<PublisherImpl> pImpl;
+		std::string name;
+		virtual void notifyImpl(std::shared_ptr<EventData>d) = 0;
 	};
 }
-#endif // !PUBLISHER_H
+#endif // !OBSERVER_H
+
+
+
+
 
