@@ -21,49 +21,44 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
-
-#ifndef STACK_H
-#define STACK_H
-#include"Publisher.h"
-#include<vector>
-
+#ifndef STACK_EVENT_DATA_H
+#define STACK_EVENT_DATA
+#include"EventData.h"
 namespace model
 {
-	class Stack : public utility::Publisher
+
+	class StackEventData : public utility::EventData
 	{
 	public:
-		// event raised by this class
-		static const std::string stackChanged;		
-		static const std::string stackError;
-	public:
-		using utility::Publisher::subscribe;
-		using utility::Publisher::unsubscribe;
+		enum ErrorType
+		{
+			TOO_FEW_ARGUMENT,
+			EMPTY,
+		};
 
-		static Stack& getInstance();
-		void push(double, bool notify = true);
-		double pop(bool notify = true);
-		double top()const;
-		void swap();
+		StackEventData(ErrorType e) : err{ e } {}
+		const char* getMessage()const { return getMessage(err); }
 
-		std::vector<double> getElements(size_t n)const;
-		void getElements(size_t n, std::vector<double>&elms)const;
+		// usefull for the Exeption
+		static const char* getMessage(ErrorType er)
+		{
+			switch (er)
+			{
+			case model::StackEventData::TOO_FEW_ARGUMENT:
+				return "Stack must have at least two elements!";
+			case model::StackEventData::EMPTY:
+				return "Attempting to pop empty Stack!";
+			default:
+				return "";
+			}
+		}
+		ErrorType getErrorType()const { return err; }
 
-		size_t size()const;
-		void clear();
 	private:
-		Stack();
-		~Stack();
-
-		Stack(const Stack&) = delete;
-		Stack(Stack&&) = delete;
-		Stack& operator=(const Stack&) = delete;
-		Stack& operator=(const Stack&&) = delete;
-
-		class StackImpl;
-		std::unique_ptr<StackImpl> pImpl;
+		ErrorType err;
 
 	};
 }
-#endif // !STACK_H
+#endif // !STACK_EVENT_DATA_H
 
 
