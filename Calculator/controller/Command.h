@@ -25,6 +25,7 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 #include<memory>
+#include<utility>
 using std::unique_ptr;
 using std::shared_ptr;
 
