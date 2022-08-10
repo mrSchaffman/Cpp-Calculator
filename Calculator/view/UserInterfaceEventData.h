@@ -1,3 +1,4 @@
+#pragma once
 /*
 	Copyright (C) 2022  Barth.Feudong
 	Author can be contacted here: <https://github.com/mrSchaffman/Cpp-Calculator>
@@ -20,20 +21,22 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
+#ifndef USER_INTERFACE_EVENT_DATA_H
+#define USER_INTERFACE_EVENT_DATA_H
+#include"EventData.h"
+#include<string>
+using std::string;
 
-#include "CommandEnteredObserver.h"
-#include"Exception.h"
-#include"UserInterfaceEventData.h"
-namespace broker
+namespace view
 {
-	CommandEnteredObserver::CommandEnteredObserver(controller::Dispatcher & disp):Observer{ "CommandEnteredObserver" },m_d{ disp }
+	class UserInterfaceEventData : public utility::EventData
 	{
-	}
-	void CommandEnteredObserver::notifyImpl(std::shared_ptr<utility::EventData> d)
-	{
-		auto data = std::dynamic_pointer_cast<view::UserInterfaceEventData>(d);
-		if (!data)
-			throw utility::Exception("Could not convert data to a Command!");
-		m_d.onCommandEntered(data->getEventData());
-	}
+	public:
+		explicit UserInterfaceEventData(const std::string&  da) :m_data{ da } {}
+		const std::string& getEventData()const { return m_data; }
+
+	private:
+		std::string m_data;
+	};
 }
+#endif // !USER_INTERFACE_EVENT_DATA_H

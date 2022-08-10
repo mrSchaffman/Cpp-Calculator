@@ -47,8 +47,6 @@ namespace view
 		static const string plusMinusPressed;
 		static const string shiftPressed;
 		
-		// the Graphical User Interface Model must subscribe to this event
-		static const string commandEntered;
 	public:
 		GraphicalUserInterfaceController(GraphicalUserInterfaceModel& m,HWND parent);
 		~GraphicalUserInterfaceController();

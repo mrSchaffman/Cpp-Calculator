@@ -22,6 +22,7 @@
 */
 
 #include "GraphicalUserInterfaceController.h"
+#include"UserInterfaceEventData.h"
 namespace view
 {
 	GraphicalUserInterfaceController::GraphicalUserInterfaceController(GraphicalUserInterfaceModel& m,HWND parent): m_parent{parent}
@@ -51,6 +52,7 @@ namespace view
 			case IDC_BT9:
 			{
 				// to do
+				//utility::Publisher::notify(characterEntered,std::make_shared< UserInterfaceEventData>(...))
 				m_model.onCharacterEntered('v');
 			}break;
 			case IDC_BT_ENTER:
