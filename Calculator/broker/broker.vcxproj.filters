@@ -18,9 +18,15 @@
     <ClCompile Include="StackChangedObserver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CommandEnteredObserver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StackChangedObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandEnteredObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -76,7 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Software_Development\Cpp-Calculator\Calculator\view;E:\Software_Development\Cpp-Calculator\Calculator\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Software_Development\Cpp-Calculator\Calculator\controller;E:\Software_Development\Cpp-Calculator\Calculator\view;E:\Software_Development\Cpp-Calculator\Calculator\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Software_Development\Cpp-Calculator\Calculator\view;E:\Software_Development\Cpp-Calculator\Calculator\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Software_Development\Cpp-Calculator\Calculator\controller;E:\Software_Development\Cpp-Calculator\Calculator\view;E:\Software_Development\Cpp-Calculator\Calculator\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,7 +102,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Software_Development\Cpp-Calculator\Calculator\view;E:\Software_Development\Cpp-Calculator\Calculator\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Software_Development\Cpp-Calculator\Calculator\controller;E:\Software_Development\Cpp-Calculator\Calculator\view;E:\Software_Development\Cpp-Calculator\Calculator\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,7 +118,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Software_Development\Cpp-Calculator\Calculator\view;E:\Software_Development\Cpp-Calculator\Calculator\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Software_Development\Cpp-Calculator\Calculator\controller;E:\Software_Development\Cpp-Calculator\Calculator\view;E:\Software_Development\Cpp-Calculator\Calculator\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,12 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CommandEnteredObserver.cpp" />
     <ClCompile Include="StackChangedObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommandEnteredObserver.h" />
     <ClInclude Include="StackChangedObserver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\controller\controller.vcxproj">
+      <Project>{5222d72f-4046-4998-a82a-a40a94e8f2a2}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\utility\utility.vcxproj">
       <Project>{07371814-fcf8-483d-9fc7-61e94fe945c2}</Project>
     </ProjectReference>
