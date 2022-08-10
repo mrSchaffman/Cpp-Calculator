@@ -25,6 +25,15 @@
 namespace view
 {
 	const std::string GraphicalUserInterfaceModel::modelChanged = "modelChanged";
+
+	GraphicalUserInterfaceModel::GraphicalUserInterfaceModel()
+	{
+		data.currentState = data.UNSHIFTED;
+		data.currentInput = "000";
+
+		registerEvent(modelChanged);
+	}
+
 	void GraphicalUserInterfaceModel::onShift()
 	{
 		// to do
@@ -35,12 +44,28 @@ namespace view
 			std::make_shared< StateData>(data)
 		);
 	}
-	GraphicalUserInterfaceModel::GraphicalUserInterfaceModel()
+	void GraphicalUserInterfaceModel::onCharacterEntered(char c)
 	{
-		data.currentState = data.UNSHIFTED;
-		data.currentInput = "000";	
+		data.currentInput = c;
 
-		registerEvent(modelChanged); 
+		notify(
+			GraphicalUserInterfaceModel::modelChanged,
+			std::make_shared< StateData>(data)
+		);
+
+	}
+	void GraphicalUserInterfaceModel::onEnter()
+	{
+		// execute enter command
+	}
+	void GraphicalUserInterfaceModel::onBackspace()
+	{
+	}
+	void GraphicalUserInterfaceModel::onPlusMinus()
+	{
+	}
+	void GraphicalUserInterfaceModel::onCommandEntered(const std::string & primaryCmd, const std::string & secondaryCmd)
+	{
 	}
 	void GraphicalUserInterfaceModel::stackChanged(const std::vector<double>& v)
 	{

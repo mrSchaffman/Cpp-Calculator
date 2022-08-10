@@ -129,12 +129,14 @@
   <ItemGroup>
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="GraphicalUserInterface.cpp" />
+    <ClCompile Include="GraphicalUserInterfaceController.cpp" />
     <ClCompile Include="GraphicalUserInterfaceModel.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h" />
     <ClInclude Include="GraphicalUserInterface.h" />
+    <ClInclude Include="GraphicalUserInterfaceController.h" />
     <ClInclude Include="GraphicalUserInterfaceModel.h" />
     <ClInclude Include="StateData.h" />
     <ClInclude Include="UserInterface.h" />

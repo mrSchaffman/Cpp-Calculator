@@ -40,9 +40,15 @@ namespace view
 		// the event raised by this class.
 		static const std::string modelChanged;
 
-		// function that raise the event
+		// function that raise the event, call by the Shift Button...
 		void onShift();
 
+		// function called by the Graphical User Interface Controller Class
+		void onCharacterEntered(char c);
+		void onEnter();
+		void onBackspace();
+		void onPlusMinus();
+		void onCommandEntered(const std::string& primaryCmd, const std::string& secondaryCmd);
 	public:
 		GraphicalUserInterfaceModel();// { registerEvent(modelChanged); }
 		~GraphicalUserInterfaceModel() = default;
