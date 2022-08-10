@@ -1,3 +1,4 @@
+#pragma once
 /*
 	Copyright (C) 2022  Barth.Feudong
 	Author can be contacted here: <https://github.com/mrSchaffman/Cpp-Calculator>
@@ -20,36 +21,40 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
+#define IDC_BT0 100
+#define IDC_BT1 101
+#define IDC_BT2 102
+#define IDC_BT3 103
+#define IDC_BT4 104
+#define IDC_BT5 105
+#define IDC_BT6 106
+#define IDC_BT7 107
+#define IDC_BT8 108
+#define IDC_BT9 109
 
-#include "GraphicalUserInterfaceModel.h"
-namespace view
-{
-	const std::string GraphicalUserInterfaceModel::modelChanged = "modelChanged";
+#define IDC_BT_PLUS			200
+#define IDC_BT_MINUS		201
+#define IDC_BT_PLUS_MINUS	202
+#define IDC_BT_DIV			203
+#define IDC_BT_MULTI		204
+#define IDC_BT_ENTER		205
+#define IDC_BT_SHIFT		206
+#define IDC_BT_EXP			207
+#define IDC_BT_POWER		208
+#define IDC_BT_BACKSPACE	209
 
-	GraphicalUserInterfaceModel::GraphicalUserInterfaceModel()
-	{
-		data.currentState = data.UNSHIFTED;
-		data.currentInput = "000";
+#define IDC_BT_UNDO			300
+#define IDC_BT_REDO			301
+#define IDC_BT_PROCEDURE	302
+#define IDC_BT_COMMA		303
 
-		registerEvent(modelChanged);
-	}
+#define IDC_LB_ACOS			400
+#define IDC_LB_ASIN			401
+#define IDC_LB_ATAN			402
+#define IDC_LB_SWAP			403
+#define IDC_LB_ROOT			404
 
-	void GraphicalUserInterfaceModel::onShift()
-	{
-		// to do
-
-		// notify the observer Display with the current data
-		notify(
-			GraphicalUserInterfaceModel::modelChanged,
-			std::make_shared< StateData>(data)
-		);
-	}
-	void GraphicalUserInterfaceModel::stackChanged(const std::vector<double>& v)
-	{
-		data.currentStack = v;
-	}
-	const StateData & GraphicalUserInterfaceModel::getState() const
-	{
-		return data;
-	}
-}
+#define IDC_BT_COS			500
+#define IDC_BT_SIN			501
+#define IDC_BT_TAN			502
+#define IDC_BT_COMMA		503

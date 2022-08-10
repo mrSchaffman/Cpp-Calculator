@@ -23,15 +23,50 @@
 */
 #ifndef GRAPHICAL_USER_INTERFACE_CONTROLLER_H
 #define GRAPHICAL_USER_INTERFACE_CONTROLLER_H
+#include<Windows.h>
+#include<string>
+#include"Publisher.h"
+#include"Resource.h"
+#include"GraphicalUserInterfaceModel.h"
+//#include"Dispatcher.h"  i need a broker 
+using std::string;
+
 namespace view
 {
 	// this hold all the User Interface widgets...
-	class GraphicalUserInterfaceController
+	// the user interface take two distinct inputs from the user: numbers and commands.
+
+	// this class pass the command to the Dispatcher
+	class GraphicalUserInterfaceController : public utility::Publisher
 	{
 	public:
+		// Event raised by this class
+		static const string enterPressed;
+		static const string characterEntered;
+		static const string backspacePressed;
+		static const string plusMinusPressed;
+		static const string shiftPressed;
+		
+		// the Graphical User Interface Model must subscribe to this event
+		static const string commandEntered;
+	public:
+		GraphicalUserInterfaceController(GraphicalUserInterfaceModel& m,HWND parent);
+		~GraphicalUserInterfaceController();
+		static LRESULT CALLBACK WindowControllerProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+	public:
+		using utility::Publisher::subscribe;
+		using utility::Publisher::unsubscribe;
 	private:
+		HWND m_parent;
+		HWND btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
+		HWND btnPlus, btnMinus,btnSubstract, btnMultiply, btnDivide, btnPlusMinus, btnComma;
+		HWND btnCosine, btnSine, btnTangent, btnPower, btnExp;
+		HWND btnEnter, btnShift, btnBackspace;
+		HWND btnUndo, btnRedo, btnProc;
+		HWND lblArcosine, lblArcsine,lblArctan,lblSwap,lblClear;
 
+		static GraphicalUserInterfaceModel& m_model;
 	};
 }
 #endif // !GRAPHICAL_USER_INTERFACE_CONTROLLER_H

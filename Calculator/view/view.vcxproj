@@ -138,6 +138,7 @@
     <ClInclude Include="GraphicalUserInterface.h" />
     <ClInclude Include="GraphicalUserInterfaceController.h" />
     <ClInclude Include="GraphicalUserInterfaceModel.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="StateData.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
