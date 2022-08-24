@@ -6,8 +6,8 @@ HRESULT CommandButton::Create(HWND hParent, const TCHAR* szCaption, int nID, con
 
     create.x = rcBound.left;
     create.y = rcBound.top;
-    create.cx = rcBound.right - create.x;
-    create.cy = rcBound.bottom - create.y;
+    create.cx = rcBound.right;// -create.x;
+    create.cy = rcBound.bottom;// -create.y;
 
     create.hwndParent = hParent;
     create.lpszName = szCaption;
@@ -40,10 +40,17 @@ HRESULT CommandButton::Create(HWND hParent, const TCHAR* szCaption, int nID, con
 
 
     HWND hwnd = CreateWindowEx(
-        create.dwExStyle, create.lpszClass, create.lpszName,
-        create.style | WS_CHILD | WS_VISIBLE,
-        create.x, create.y, create.cx, create.cy, create.hwndParent, create.hMenu,
-        hinst, create.lpCreateParams);
+        create.dwExStyle, 
+        create.lpszClass, 
+        create.lpszName,
+        create.style | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS,
+        create.x, create.y, 
+        create.cx, create.cy,
+        create.hwndParent, 
+        create.hMenu,
+        hinst, 
+        create.lpCreateParams
+    );
 
     if (hwnd == 0)
     {
@@ -55,15 +62,7 @@ HRESULT CommandButton::Create(HWND hParent, const TCHAR* szCaption, int nID, con
 
 }
 
-CreateStruct::CreateStruct()
+HINSTANCE GetInstance()
 {
-    ZeroMemory(this, sizeof(*this));
-}
-
-void CreateStruct::SetBoundingRect(const Rect& rc)
-{
-    x = rc.left;
-    y = rc.top;
-    cx = rc.right - x;
-    cy = rc.bottom - y;
+    return (HINSTANCE)GetModuleHandle(NULL);
 }
