@@ -8,6 +8,10 @@
 #include <string>
 #include <memory>
 #include<map>
+
+#define BTN_WIDTH 60
+#define BTN_HEIGH 30
+
 using std::map;
 using std::string;
 
@@ -15,7 +19,6 @@ namespace view {
 
     enum WindowID
     {
-        EDIT_DISPLAY = 300,
         BTN_0,
         BTN_1,
         BTN_2,
@@ -68,23 +71,16 @@ namespace view {
         static LRESULT CALLBACK	InputWindowProc(HWND, UINT, WPARAM, LPARAM);
         HRESULT Create(HWND hParent, int nID, const Rect& rcBound);
 
-        void addCommandButton(
-            const string& dispPrimaryCmd, 
-            const string& primaryCmd,
-            const string& dispShftCmd, 
-            const string& shftCmd
-        );
+        HWND getWindow()const { return m_hwnd; }
 
-        void setupFinalButtons();
-
-    //signals:
-    //    void characterEntered(char c);
-    //    void enterPressed();
-    //    void backspacePressed();
-    //    void plusMinusPressed();
-    //    void commandEntered(std::string, std::string);
-    //    void shiftPressed();
-    //    void procedurePressed();
+        //signals:
+        //    void characterEntered(char c);
+        //    void enterPressed();
+        //    void backspacePressed();
+        //    void plusMinusPressed();
+        //    void commandEntered(std::string, std::string);
+        //    void shiftPressed();
+        //    void procedurePressed();
 
     private:
         void allocateButtons();
@@ -110,9 +106,8 @@ namespace view {
 
     private:
         HWND m_hwnd;
-        static map<size_t, HWND>gid;
-        //class InputWidgetImpl;
-        //std::unique_ptr<InputWidgetImpl> pimpl_;
+
+        static map<size_t, HWND>iGid;
     };
 
 }
