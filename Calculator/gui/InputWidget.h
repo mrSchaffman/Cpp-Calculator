@@ -12,6 +12,8 @@
 #define BTN_WIDTH 60
 #define BTN_HEIGH 30
 
+#define CHARACTER_ENTERED   600
+
 using std::map;
 using std::string;
 
@@ -57,12 +59,14 @@ namespace view {
     class InputWidget
     {
     public:
-        static const string characterEntered;
-        static const string enterPressed;
-        static const string backspacePressed;
-        static const string commandEntered;
-        static const string shiftPressed;
-        static const string procedurePressed;
+        // message send by this Class
+        static UINT uCharacterEnteredMsg;
+        static UINT uCommandEnteredMsg;
+        static UINT uEnterPressedMsg;
+        static UINT uProcedurePressedMsg;
+        static UINT uShiftPressedMsg;
+        static UINT uPlusMinusMsg;
+
     public:
 
         explicit InputWidget() :m_hwnd{ NULL } {}
@@ -79,7 +83,7 @@ namespace view {
         //    void backspacePressed();
         //    void plusMinusPressed();
         //    void commandEntered(std::string, std::string);
-        //    void shiftPressed();
+        static void shiftPressed();
         //    void procedurePressed();
 
     private:
@@ -90,19 +94,19 @@ namespace view {
 
 
     private:
-        void onEex();
-        void onDecimal();
-        void onPlusMinus();
-        void onZero();
-        void onOne();
-        void onTwo();
-        void onThree();
-        void onFour();
-        void onFive();
-        void onSix();
-        void onSeven();
-        void onEight();
-        void onNine();
+        static void onEex();
+        static void onDecimal();
+        static void onPlusMinus();
+        static void onZero();
+        static void onOne();
+        static void onTwo();
+        static void onThree();
+        static void onFour();
+        static void onFive();
+        static void onSix();
+        static void onSeven();
+        static void onEight();
+        static void onNine();
 
     private:
         HWND m_hwnd;

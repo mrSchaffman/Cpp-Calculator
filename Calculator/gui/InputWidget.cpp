@@ -31,6 +31,13 @@ namespace view
 	CommandButton btEex;
 	CommandButton btShift;
 
+	UINT InputWidget::uCharacterEnteredMsg = 0;
+	UINT InputWidget::uCommandEnteredMsg = 0;
+	UINT InputWidget::uEnterPressedMsg = 0;
+	UINT InputWidget::uProcedurePressedMsg = 0;
+	UINT InputWidget::uShiftPressedMsg = 0;
+	UINT InputWidget::uPlusMinusMsg = 0;
+
 	LRESULT InputWidget::InputWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		// L 1
@@ -74,6 +81,7 @@ namespace view
 		static 	Rect r26{ 2 * (BTN_WIDTH)+5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 		static 	Rect r27{ 3 * (BTN_WIDTH)+5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 
+
 		switch (uMsg)
 		{
 		case WM_NCDESTROY:
@@ -81,6 +89,13 @@ namespace view
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
 		case WM_CREATE:
 		{
+			uPlusMinusMsg = RegisterWindowMessage(L"Plus Minus Pressed");
+			uShiftPressedMsg = RegisterWindowMessage(L"Shift Pressed");
+			uProcedurePressedMsg = RegisterWindowMessage(L"Procedure Pressed");
+			uEnterPressedMsg = RegisterWindowMessage(L"Enter Pressed");
+			uCommandEnteredMsg = RegisterWindowMessage(L"Command Pressed");
+			uCharacterEnteredMsg = RegisterWindowMessage(L"Character Pressed");
+
 			HRESULT hr1 = btUndo.Create(hwnd, L"Undo", BTN_UNDO, rU);
 			HRESULT hr2 = btRedo.Create(hwnd, L"Redo", BTN_REDO, rR);
 			HRESULT hr3 = btProc.Create(hwnd, L"Proc", BTN_PROC, rP);
@@ -155,28 +170,38 @@ namespace view
 			{
 
 			case BTN_0:
+				onZero();
+				break;
 			case BTN_1:
+				onOne();
+				break;
 			case BTN_2:
+				onTwo();
+				break;
 			case BTN_3:
+				onThree();
+				break;
 			case BTN_4:
+				onFour();
+				break;
 			case BTN_5:
+				onFive();
+				break;
 			case BTN_6:
+				onSix();
+				break;
 			case BTN_7:
+				onSeven();
+				break;
 			case BTN_8:
+				onEight();
+				break;
 			case BTN_9:
-			{
-				HWND parent = GetParent(hwnd);
-				auto r = GetWindowLong(hwnd, GWLP_ID);
-
-				LPWSTR lpString{};
-				auto rr = GetWindowText(iGid[wParam], lpString, 3);
-
-				SendMessage(parent, BM_CLICK, (wParam), (LPARAM)0);
-			}break;
-			case BTN_PROC:
-			{
-				printf("proc_button press!");
-			}break;
+				onNine();
+				break;
+			case BTN_SHIFT:
+				shiftPressed();
+				break;
 			default:
 				break;
 			}
@@ -277,6 +302,10 @@ namespace view
 	}
 
 
+	void InputWidget::shiftPressed()
+	{
+	}
+
 	void InputWidget::allocateButtons()
 	{
 	}
@@ -296,6 +325,61 @@ namespace view
 		HRESULT hr = bt.Create(m_hwnd, L"Proc", BTN_PROC, rc);
 
 
+	}
+
+	void InputWidget::onEex()
+	{
+	}
+
+	void InputWidget::onDecimal()
+	{
+	}
+
+	void InputWidget::onPlusMinus()
+	{
+	}
+
+	void InputWidget::onZero()
+	{
+		HWND destWind = FindWindow(NULL, L"GuiModel");
+		if (destWind)
+			SendMessage(destWind, uCharacterEnteredMsg, '0', 0);
+	}
+
+	void InputWidget::onOne()
+	{
+	}
+
+	void InputWidget::onTwo()
+	{
+	}
+
+	void InputWidget::onThree()
+	{
+	}
+
+	void InputWidget::onFour()
+	{
+	}
+
+	void InputWidget::onFive()
+	{
+	}
+
+	void InputWidget::onSix()
+	{
+	}
+
+	void InputWidget::onSeven()
+	{
+	}
+
+	void InputWidget::onEight()
+	{
+	}
+
+	void InputWidget::onNine()
+	{
 	}
 
 }
