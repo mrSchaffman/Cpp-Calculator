@@ -3,6 +3,7 @@
 namespace view
 {
 	map<size_t, HWND>InputWidget::iGid = {};
+	HWND m_hwnd = NULL;
 	CommandButton bt0;
 	CommandButton bt1;
 	CommandButton bt2;
@@ -31,55 +32,55 @@ namespace view
 	CommandButton btEex;
 	CommandButton btShift;
 
-	UINT InputWidget::uCharacterEnteredMsg = 0;
-	UINT InputWidget::uCommandEnteredMsg = 0;
-	UINT InputWidget::uEnterPressedMsg = 0;
-	UINT InputWidget::uProcedurePressedMsg = 0;
-	UINT InputWidget::uShiftPressedMsg = 0;
-	UINT InputWidget::uPlusMinusMsg = 0;
+	//UINT InputWidget::uCharacterEnteredMsg =0;
+	//UINT InputWidget::uCommandEnteredMsg=0;
+	//UINT InputWidget::uEnterPressedMsg=0;
+	//UINT InputWidget::uProcedurePressedMsg=0;
+	//UINT InputWidget::uShiftPressedMsg=0;
+	//UINT InputWidget::uPlusMinusMsg=0;
 
 	LRESULT InputWidget::InputWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		// L 1
 		static 	Rect rU{ 5,5,BTN_WIDTH,BTN_HEIGH };
 		static 	Rect rR{ BTN_WIDTH + 5,5,BTN_WIDTH,BTN_HEIGH };
-		static 	Rect rP{ 2 * (BTN_WIDTH)+5,5,BTN_WIDTH,BTN_HEIGH };
+		static 	Rect rP{ 2 * (BTN_WIDTH )+5,5,BTN_WIDTH,BTN_HEIGH };
 
 		// L 2
 		static 	Rect r4{ 5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
 		static 	Rect r5{ BTN_WIDTH + 5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r6{ 2 * (BTN_WIDTH)+5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r7{ 3 * (BTN_WIDTH)+5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
+		static 	Rect r6{ 2 * (BTN_WIDTH )+5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
+		static 	Rect r7{ 3 * (BTN_WIDTH )+5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
 
 		// L 3
 		static 	Rect r8{ 5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 		static 	Rect r9{ BTN_WIDTH + 5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r10{ 2 * (BTN_WIDTH)+5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r11{ 3 * (BTN_WIDTH)+5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		static 	Rect r10{ 2 * (BTN_WIDTH )+5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		static 	Rect r11{ 3 * (BTN_WIDTH )+5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 
 		// L 4
 		static 	Rect r12{ 5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 		static 	Rect r13{ BTN_WIDTH + 5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r14{ 2 * (BTN_WIDTH)+5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r15{ 3 * (BTN_WIDTH)+5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		static 	Rect r14{ 2 * (BTN_WIDTH )+5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		static 	Rect r15{ 3 * (BTN_WIDTH )+5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 
 		// L 5
 		static 	Rect r16{ 5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 		static 	Rect r17{ BTN_WIDTH + 5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r18{ 2 * (BTN_WIDTH)+5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		static 	Rect r18{ 2 * (BTN_WIDTH )+5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 		static 	Rect r19{ 3 * (BTN_WIDTH)+5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 
 		// L 6
 		static 	Rect r20{ 5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 		static 	Rect r21{ BTN_WIDTH + 5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r22{ 2 * (BTN_WIDTH)+5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r23{ 3 * (BTN_WIDTH)+5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		static 	Rect r22{ 2 * (BTN_WIDTH )+5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		static 	Rect r23{ 3 * (BTN_WIDTH )+5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 
 		// L 7
 		static 	Rect r24{ 5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 		static 	Rect r25{ BTN_WIDTH + 5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r26{ 2 * (BTN_WIDTH)+5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r27{ 3 * (BTN_WIDTH)+5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		static 	Rect r26{ 2 * (BTN_WIDTH) + 5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		static 	Rect r27{ 3 * (BTN_WIDTH) + 5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 
 
 		switch (uMsg)
@@ -89,12 +90,12 @@ namespace view
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
 		case WM_CREATE:
 		{
-			uPlusMinusMsg = RegisterWindowMessage(L"Plus Minus Pressed");
-			uShiftPressedMsg = RegisterWindowMessage(L"Shift Pressed");
-			uProcedurePressedMsg = RegisterWindowMessage(L"Procedure Pressed");
-			uEnterPressedMsg = RegisterWindowMessage(L"Enter Pressed");
-			uCommandEnteredMsg = RegisterWindowMessage(L"Command Pressed");
-			uCharacterEnteredMsg = RegisterWindowMessage(L"Character Pressed");
+			//uPlusMinusMsg = RegisterWindowMessage(L"Plus Minus Pressed");
+			//uShiftPressedMsg = RegisterWindowMessage(L"Shift Pressed");
+			//uProcedurePressedMsg = RegisterWindowMessage(L"Procedure Pressed");
+			//uEnterPressedMsg = RegisterWindowMessage(L"Enter Pressed");
+			//uCommandEnteredMsg = RegisterWindowMessage(L"Command Pressed");
+			//CM_CHARACTE_ENTERED = RegisterWindowMessage(L"Character Pressed");
 
 			HRESULT hr1 = btUndo.Create(hwnd, L"Undo", BTN_UNDO, rU);
 			HRESULT hr2 = btRedo.Create(hwnd, L"Redo", BTN_REDO, rR);
@@ -163,7 +164,7 @@ namespace view
 
 
 		}
-		return 0;
+			return 0;
 		case WM_COMMAND:
 		{
 			switch (LOWORD(wParam))
@@ -295,6 +296,7 @@ namespace view
 				return __HRESULT_FROM_WIN32(GetLastError());
 			}
 
+			m_hwnd = hwnd;
 			return S_OK;
 		}
 
@@ -304,6 +306,7 @@ namespace view
 
 	void InputWidget::shiftPressed()
 	{
+		SendMessage(GetParent(m_hwnd), CALCM_SHIFT_PRESSED, 0, 0);
 	}
 
 	void InputWidget::allocateButtons()
@@ -341,9 +344,9 @@ namespace view
 
 	void InputWidget::onZero()
 	{
-		HWND destWind = FindWindow(NULL, L"GuiModel");
-		if (destWind)
-			SendMessage(destWind, uCharacterEnteredMsg, '0', 0);
+		HWND destWind = FindWindow(TEXT("GuiModel"), L"GuiModel");
+		//if (destWind)
+		//	//SendMessage(destWind, CALCM_CHARACTE_ENTERED, '0', 0);
 	}
 
 	void InputWidget::onOne()

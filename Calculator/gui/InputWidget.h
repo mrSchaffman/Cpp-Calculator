@@ -8,11 +8,11 @@
 #include <string>
 #include <memory>
 #include<map>
+#include"CalculatorMessage.h"
 
 #define BTN_WIDTH 60
 #define BTN_HEIGH 30
-
-#define CHARACTER_ENTERED   600
+#define CALCM_CHARACTE_ENTERED 3000
 
 using std::map;
 using std::string;
@@ -59,32 +59,23 @@ namespace view {
     class InputWidget
     {
     public:
-        // message send by this Class
-        static UINT uCharacterEnteredMsg;
-        static UINT uCommandEnteredMsg;
-        static UINT uEnterPressedMsg;
-        static UINT uProcedurePressedMsg;
-        static UINT uShiftPressedMsg;
-        static UINT uPlusMinusMsg;
 
-    public:
-
-        explicit InputWidget() :m_hwnd{ NULL } {}
+        explicit InputWidget(){}
         ~InputWidget() = default;
 
         static LRESULT CALLBACK	InputWindowProc(HWND, UINT, WPARAM, LPARAM);
         HRESULT Create(HWND hParent, int nID, const Rect& rcBound);
 
-        HWND getWindow()const { return m_hwnd; }
+        //HWND getWindow()const { return m_hwnd; }
 
-        //signals:
-        //    void characterEntered(char c);
-        //    void enterPressed();
-        //    void backspacePressed();
-        //    void plusMinusPressed();
-        //    void commandEntered(std::string, std::string);
+    //signals:
+    //    void characterEntered(char c);
+    //    void enterPressed();
+    //    void backspacePressed();
+    //    void plusMinusPressed();
+    //    void commandEntered(std::string, std::string);
         static void shiftPressed();
-        //    void procedurePressed();
+    //    void procedurePressed();
 
     private:
         void allocateButtons();
@@ -109,8 +100,6 @@ namespace view {
         static void onNine();
 
     private:
-        HWND m_hwnd;
-
         static map<size_t, HWND>iGid;
     };
 
