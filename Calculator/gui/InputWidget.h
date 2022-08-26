@@ -62,6 +62,10 @@ namespace view {
     {
     public:
         explicit InputWidget() :m_hwnd{ NULL } {}
+        explicit InputWidget(HWND parent, int nID, const Rect& rcBound) :m_hwnd{ NULL }
+        {
+            Create(parent, nID, rcBound);
+        }
         ~InputWidget() = default;
 
         HRESULT Create(HWND hParent, int nID, const Rect& rcBound);

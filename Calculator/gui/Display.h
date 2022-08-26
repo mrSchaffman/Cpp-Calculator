@@ -5,24 +5,27 @@
 
 namespace view
 {
-	LRESULT CALLBACK DisplayProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	// the View of The View Subsystem
 	class Display
 	{
 
 	public:
-		Display(const GuiModel& g)
+		Display(const GuiModel& g, HWND parent, int nID, int nLStack = 6, int minCharWide = 25)
 			:model{ g },
 			hwndDisplay{ NULL },
+			parent{ parent },
 			hwndStatusBar{ NULL },
 			hwndLabelShiftIndicator{ NULL },
-			nLinesStack{ 0 },
-			nCharWide{ 0 },
-			ID{ 0 }
-		{};
+			nLinesStack{ nLStack },
+			nCharWide{ minCharWide },
+			ID{ nID }
+		{
+			Create(parent, nID, nLStack, minCharWide);
+		};
 		HRESULT Create(HWND parent, int nID, int nLinesStack = 6, int minCharWide = 25);
 		HWND getWindow() const { return hwndDisplay; }
+		void setParent(HWND p) { parent = p; }
 
 	public:
 		void onModelChanged();
@@ -35,6 +38,7 @@ namespace view
 		const GuiModel& model;
 
 		HWND hwndDisplay;
+		HWND parent;
 		HWND hwndStatusBar;
 		HWND hwndLabelShiftIndicator;
 		int nLinesStack;

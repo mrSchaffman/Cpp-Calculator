@@ -244,6 +244,9 @@ namespace view
 			case BTN_PROC:
 				SendMessage(GetParent(hwnd), CALCM_PROCEDURE_PRESSED, 0, 0);
 				break;
+			case BTN_SHIFT:
+				SendMessage(GetParent(hwnd), CALCM_SHIFT_PRESSED, 0, 0);
+				break;
 			default:
 				break;
 			}

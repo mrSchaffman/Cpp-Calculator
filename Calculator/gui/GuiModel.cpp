@@ -4,7 +4,7 @@ using std::pair;
 
 namespace view
 {
-	GuiModel::GuiModel(HWND p) : parent{ p }, guiModelHandle{ NULL }
+	GuiModel::GuiModel(HWND p) : parent{ p }, guiModelHandle{ NULL }, m_state{}
 	{
 		WNDCLASSEX winC;
 		ZeroMemory(&winC, sizeof(WNDCLASSEX));
@@ -43,9 +43,10 @@ namespace view
 	}
 	void GuiModel::onShift()
 	{
-		m_state.filter == Filter::SHIFTED ?
-			Filter::UNSHIFTED
-			: Filter::SHIFTED;
+		if (m_state.filter == Filter::UNSHIFTED)
+			m_state.filter = Filter::SHIFTED;
+		else
+			m_state.filter = Filter::UNSHIFTED;
 		SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
 	}
 	void GuiModel::onEnter()
@@ -61,14 +62,14 @@ namespace view
 	void GuiModel::onCharactedEntered(char c)
 	{
 		m_state.currentInput += c;
-		//SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
+		SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
 	}
 	void GuiModel::onBackspace()
 	{
 		if (m_state.currentInput.size() > 0)
 		{
 			m_state.currentInput = m_state.currentInput.substr(0, m_state.currentInput.size() - 1);
-			//SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
+			SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
 		}
 		else
 			onCommandEntered("drop", "clear");
@@ -107,7 +108,7 @@ namespace view
 				m_state.currentInput = halves.first + '-' + halves.second;
 			}
 		}
-		//SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
+		SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
 	}
 	void GuiModel::onCommandEntered(string primaryCmd, string shiftCmd)
 	{

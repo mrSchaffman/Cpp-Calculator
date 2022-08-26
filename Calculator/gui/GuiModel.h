@@ -25,8 +25,7 @@ namespace view
 			Filter filter;
 		};
 
-		explicit GuiModel(HWND parent = NULL);
-		GuiModel() :guiModelHandle{ NULL }, parent{ NULL }, m_state{}{}
+		explicit GuiModel(HWND parent);
 
 		~GuiModel() = default;
 		HWND getWindow()const { return guiModelHandle; }

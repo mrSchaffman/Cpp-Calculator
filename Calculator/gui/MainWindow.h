@@ -45,7 +45,9 @@ namespace view
 		void OnCreate();
 		void OnPaint() override;
 	private:
-		InputWidget inptWin;
+		InputWidget* inptWin;
+		GuiModel* model;
+		Display* display;
 		static map<size_t, HWND>gid;
 	};
 }

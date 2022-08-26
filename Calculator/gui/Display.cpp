@@ -1,5 +1,5 @@
 #include "Display.h"
-#include<ostream>
+#include<sstream>
 #include<string>
 
 using std::ostringstream;
@@ -8,31 +8,22 @@ namespace view
 {
 	HRESULT Display::Create(HWND parent, int nID, int nLinesStack, int minCharWide)
 	{
-		//WNDCLASSEX cs;
-		//ZeroMemory(&cs, sizeof(WNDCLASSEX));
-
-		//cs.cbSize = sizeof(WNDCLASSEX);
-		//cs.lpszClassName = TEXT("STATIC");
-		//cs.lpfnWndProc = DisplayProc;
-		//cs.hInstance = GetModuleHandle(NULL);
-		//RegisterClassEx(&cs);
-
 		if (hwndDisplay != NULL) return E_FAIL;
 		if (parent == NULL) return E_INVALIDARG;
 
 		HWND hwnd = CreateWindowEx(
 			0,
 			TEXT("STATIC"),
-			L"6:",
+			L"6:\n5:\n4:\n3:\n2:\n1:\n",
 			WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS,
 			5, 5,
-			250, 90,
+			250, 95,
 			parent,
 			(HMENU)(INT_PTR)nID,
 			GetModuleHandle(NULL),
 			NULL
 		);
-		if (hwndDisplay == 0)
+		if (hwnd == 0)
 			return __HRESULT_FROM_WIN32(GetLastError());
 
 		hwndDisplay = hwnd;
@@ -44,73 +35,56 @@ namespace view
 		const GuiModel::State& state = model.getState();
 		if (state.filter == GuiModel::Filter::SHIFTED)
 		{
+			printf("GUI in Shift mode");
 			//shiftIndicator_->show();
 		}
-		//else shiftIndicator_->hide();
+		else
+		{
+			printf("GUI in UnShift mode");
+			//shiftIndicator_->hide();
+		}
 
-		//ostringstream oss;
-		//auto hasInput = state.curInput.size() != 0;
-		//auto start = nLinesStack_ - (hasInput ? 1 : 0);
+		ostringstream oss;
+		auto hasInput = state.currentInput.size() != 0;
+		auto start = nLinesStack - (hasInput ? 1 : 0);
 
-		//for (int i = start - 1; i > -1; --i)
-		//{
-		//	bool valueExists = i < static_cast<int>(state.curStack.size());
-		//	oss << createLine(i, (valueExists ? state.curStack[i] : 0 /*dummy value*/), state.curStack.size()) << (i != 0 ? "\n" : "");
-		//}
+		for (int i = start - 1; i > -1; --i)
+		{
+			bool valueExists = i < static_cast<int>(state.currentStack.size());
+			oss << createLine(i, (valueExists ? state.currentStack[i] : 0 /*dummy value*/), state.currentStack.size()) << (i != 0 ? "\n" : "");
+		}
 
-		//if (hasInput)
-		//{
-		//	oss << "\n"
-		//		<< state.curInput;
-		//}
-
-		//label_->setText(QString::fromStdString(oss.str()));
+		if (hasInput)
+		{
+			oss << "\n"
+				<< state.currentInput;
+		}
+		SetWindowText(hwndDisplay, L"waiting for implementation!");
 
 	}
 	void Display::onSize()
 	{
 	}
-	string Display::createLine(int lineNumber, double value, int stackSize)
+	string Display::createLine(int lineNumber, double sv, int stackSize)
 	{
-		return string();
-	}
-	LRESULT CALLBACK DisplayProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-	{
-		switch (msg)
+		string value{ "" };
+		if (lineNumber < stackSize)
 		{
-		case CALCM_MODEL_CHANGED:
+			ostringstream t;
+			t.precision(12);
+			t << sv;
+			value = t.str();
+		}
+
+		ostringstream oss;
+		oss << lineNumber + 1 << ":";
+		int lineLabelSize{ static_cast<int>(oss.str().size()) };
+		for (int i = 0; i < nCharWide - static_cast<int>(value.length()) - lineLabelSize; ++i)
 		{
-			//const GuiModel::State& state = model.getState();
-			//if (state.filter == GuiModel::Filter::SHIFTED)
-			//{
-			//	//shiftIndicator_->show();
-			//}
-			//else shiftIndicator_->hide();
-
-			//ostringstream oss;
-			//auto hasInput = state.curInput.size() != 0;
-			//auto start = nLinesStack_ - (hasInput ? 1 : 0);
-
-			//for (int i = start - 1; i > -1; --i)
-			//{
-			//	bool valueExists = i < static_cast<int>(state.curStack.size());
-			//	oss << createLine(i, (valueExists ? state.curStack[i] : 0 /*dummy value*/), state.curStack.size()) << (i != 0 ? "\n" : "");
-			//}
-
-			//if (hasInput)
-			//{
-			//	oss << "\n"
-			//		<< state.curInput;
-			//}
-
-			//label_->setText(QString::fromStdString(oss.str()));
-
+			oss << ' ';
 		}
-		return 0;
-		default:
-			DefWindowProc(hwnd, msg, wParam, lParam);
-			break;
-		}
+		oss << value;
+		return oss.str();
 	}
 
 }

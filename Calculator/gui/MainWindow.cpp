@@ -4,7 +4,6 @@
 namespace view
 {
 	gid_map mainGuiId{};
-	//GuiModel model;
 
 	LRESULT MainWindow::OnReceiveMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
@@ -17,18 +16,11 @@ namespace view
 		{
 			mainGuiId[MAIN_WINDOW] = m_hwnd;
 
-			Rect rc{ 5,100,250,245 };
+			Rect rc{ 5,105,250,245 };
 
-			GuiModel Model{ m_hwnd };
-			mainGuiId[GUI_MODEL] = Model.getWindow();
-
-			Display displayWin{ Model };
-
-			HRESULT hr1 = displayWin.Create(m_hwnd, DISPLAY);
-			mainGuiId[DISPLAY] = displayWin.getWindow();
-
-			HRESULT hr = inptWin.Create(m_hwnd, INPUT_WIDGET, rc);
-			mainGuiId[INPUT_WIDGET] = inptWin.getWindow();
+			model = new GuiModel{ m_hwnd };
+			inptWin = new InputWidget(m_hwnd, INPUT_WIDGET, rc);
+			display = new Display(*model, m_hwnd, DISPLAY);
 
 		}
 		return 0;
@@ -48,13 +40,13 @@ namespace view
 		case CALCM_SHIFT_PRESSED:
 		{
 			printf("Shift_button press!");
-			//gid[GUI_MODEL].onShift();
+			model->onShift();
 		}break;
 		case CALCM_CHARACTER_ENTERED:
 		{
 			printf("character button press!");
 			char v = (char)wParam;
-			//gid[GUI_MODEL].onShift();
+			model->onCharactedEntered(v);
 		}break;
 		case CALCM_COMMAND_ENTERED:
 		{
@@ -65,34 +57,27 @@ namespace view
 		case CALCM_ENTER_PRESSED:
 		{
 			printf("Enter button press!");
-			const TCHAR* v = (TCHAR*)wParam;
-			//gid[GUI_MODEL].onShift();
+			model->onEnter();
 		}break;
 		case CALCM_PROCEDURE_PRESSED:
 		{
 			printf("Enter button press!");
-			//const TCHAR* v = (TCHAR*)wParam;
-			//gid[GUI_MODEL].onShift();
+			//model->on
 		}break;
 		case CALCM_PLUS_MINUS_PRESSED:
 		{
 			printf("+/- button press!");
-			//const TCHAR* v = (TCHAR*)wParam;
-			//gid[GUI_MODEL].onShift();
+			model->onPlusMinus();
 		}break;
 		case CALCM_BACKSPACE_ENTERED:
 		{
 			printf("BKSP button press!");
-			//const TCHAR* v = (TCHAR*)wParam;
-			//gid[GUI_MODEL].onShift();
+			model->onBackspace();
 		}break;
 		case CALCM_MODEL_CHANGED:
 		{
 			printf("send by the Gui model...!");
-			//const TCHAR* v = (TCHAR*)wParam;
-			SendMessage(mainGuiId[DISPLAY], CALCM_MODEL_CHANGED, wParam, 0);
-
-			//gid[DISPLAY].onModelChanged();
+			display->onModelChanged();
 		}break;
 		case WM_DESTROY:
 			PostQuitMessage(0);
