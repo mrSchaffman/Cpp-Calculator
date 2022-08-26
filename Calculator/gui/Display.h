@@ -10,16 +10,16 @@ namespace view
 	// the View of The View Subsystem
 	class Display
 	{
-	
+
 	public:
 		Display(const GuiModel& g)
-			:model{g},
+			:model{ g },
 			hwndDisplay{ NULL },
 			hwndStatusBar{ NULL },
 			hwndLabelShiftIndicator{ NULL },
 			nLinesStack{ 0 },
 			nCharWide{ 0 },
-			ID{0}
+			ID{ 0 }
 		{};
 		HRESULT Create(HWND parent, int nID, int nLinesStack = 6, int minCharWide = 25);
 		HWND getWindow() const { return hwndDisplay; }

@@ -3,7 +3,8 @@
 
 namespace view
 {
-	map<size_t, HWND>MainWindow::gid = {};
+	gid_map mainGuiId{};
+	//GuiModel model;
 
 	LRESULT MainWindow::OnReceiveMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
@@ -14,22 +15,23 @@ namespace view
 			return DefWindowProc(m_hwnd, uMsg, wParam, lParam);
 		case WM_CREATE:
 		{
+			mainGuiId[MAIN_WINDOW] = m_hwnd;
+
 			Rect rc{ 5,100,250,245 };
 
 			GuiModel Model{ m_hwnd };
-			gid[GUI_MODEL] = Model.getWindow();
+			mainGuiId[GUI_MODEL] = Model.getWindow();
 
 			Display displayWin{ Model };
 
-
 			HRESULT hr1 = displayWin.Create(m_hwnd, DISPLAY);
-			gid[DISPLAY] = displayWin.getWindow();
+			mainGuiId[DISPLAY] = displayWin.getWindow();
 
 			HRESULT hr = inptWin.Create(m_hwnd, INPUT_WIDGET, rc);
-			//gid[INPUT_WIDGET] = inptWin.getWindow();
+			mainGuiId[INPUT_WIDGET] = inptWin.getWindow();
 
 		}
-			return 0;
+		return 0;
 		case WM_COMMAND:
 		{
 			switch (LOWORD(wParam))
@@ -42,11 +44,55 @@ namespace view
 				break;
 			}
 		}
-			break;
+		break;
 		case CALCM_SHIFT_PRESSED:
 		{
 			printf("Shift_button press!");
 			//gid[GUI_MODEL].onShift();
+		}break;
+		case CALCM_CHARACTER_ENTERED:
+		{
+			printf("character button press!");
+			char v = (char)wParam;
+			//gid[GUI_MODEL].onShift();
+		}break;
+		case CALCM_COMMAND_ENTERED:
+		{
+			printf("command button press!");
+			const TCHAR* v = (TCHAR*)wParam;
+			// ::raise(UserInterface::CommandEntered, std::make_shared<CommandData>(cmd));
+		}break;
+		case CALCM_ENTER_PRESSED:
+		{
+			printf("Enter button press!");
+			const TCHAR* v = (TCHAR*)wParam;
+			//gid[GUI_MODEL].onShift();
+		}break;
+		case CALCM_PROCEDURE_PRESSED:
+		{
+			printf("Enter button press!");
+			//const TCHAR* v = (TCHAR*)wParam;
+			//gid[GUI_MODEL].onShift();
+		}break;
+		case CALCM_PLUS_MINUS_PRESSED:
+		{
+			printf("+/- button press!");
+			//const TCHAR* v = (TCHAR*)wParam;
+			//gid[GUI_MODEL].onShift();
+		}break;
+		case CALCM_BACKSPACE_ENTERED:
+		{
+			printf("BKSP button press!");
+			//const TCHAR* v = (TCHAR*)wParam;
+			//gid[GUI_MODEL].onShift();
+		}break;
+		case CALCM_MODEL_CHANGED:
+		{
+			printf("send by the Gui model...!");
+			//const TCHAR* v = (TCHAR*)wParam;
+			SendMessage(mainGuiId[DISPLAY], CALCM_MODEL_CHANGED, wParam, 0);
+
+			//gid[DISPLAY].onModelChanged();
 		}break;
 		case WM_DESTROY:
 			PostQuitMessage(0);
@@ -58,6 +104,10 @@ namespace view
 			return DefWindowProc(m_hwnd, uMsg, wParam, lParam);
 		}
 		return TRUE;
+	}
+
+	void MainWindow::OnCreate()
+	{
 	}
 
 	void MainWindow::OnPaint()

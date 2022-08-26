@@ -24,11 +24,12 @@ namespace view
 {
 	enum MainWinGUIId
 	{
-		INPUT_WIDGET= 500,
+		MAIN_WINDOW = 500,
+		INPUT_WIDGET,
 		DISPLAY,
 		GUI_MODEL
 	};
-	class MainWindow : public BaseWindow
+	class MainWindow : public BaseWindow//,UserInterface
 	{
 	public:
 
@@ -36,7 +37,10 @@ namespace view
 		LRESULT OnReceiveMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 		LPCTSTR  ClassName() const override { return L"Main Window Class"; }
 		LPCTSTR WindowName() const override { return L"Calculator"; }
-		LPCTSTR MenuName() const override{ return MAKEINTRESOURCE(IDC_APP_MENU); }
+		LPCTSTR MenuName() const override { return MAKEINTRESOURCE(IDC_APP_MENU); }
+
+		//void postMessage(const std::string& m) override;
+		//void stackChanged() override;
 
 		void OnCreate();
 		void OnPaint() override;

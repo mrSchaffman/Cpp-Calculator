@@ -4,7 +4,7 @@ using std::pair;
 
 namespace view
 {
-	GuiModel::GuiModel(HWND p) : parent{p},guiModelHandle{NULL}
+	GuiModel::GuiModel(HWND p) : parent{ p }, guiModelHandle{ NULL }
 	{
 		WNDCLASSEX winC;
 		ZeroMemory(&winC, sizeof(WNDCLASSEX));
@@ -43,16 +43,16 @@ namespace view
 	}
 	void GuiModel::onShift()
 	{
-		m_state.filter == Filter::SHIFTED ? 
-			Filter::UNSHIFTED 
-				: Filter::SHIFTED;
+		m_state.filter == Filter::SHIFTED ?
+			Filter::UNSHIFTED
+			: Filter::SHIFTED;
 		SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
 	}
 	void GuiModel::onEnter()
 	{
 		if (m_state.currentInput.empty())
 			onCommandEntered("dup", "swap");
-		else 
+		else
 		{
 			clearInput();
 			onCommandEntered(m_state.currentInput, "");
@@ -96,7 +96,7 @@ namespace view
 		{
 			auto left = m_state.currentInput.substr(0, pos + 1);
 			auto right = m_state.currentInput.substr(pos + 1, m_state.currentInput.size() - pos);
-			auto halves =  std::make_pair(left, right);
+			auto halves = std::make_pair(left, right);
 
 			if (m_state.currentInput.size() > pos && m_state.currentInput[pos + 1] == '-')
 			{
@@ -109,15 +109,52 @@ namespace view
 		}
 		//SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
 	}
-	void GuiModel::onCommandEntered(string primaryCmd, string secondaryCmd)
+	void GuiModel::onCommandEntered(string primaryCmd, string shiftCmd)
 	{
+		// need to choose either primary or shift command
+		string cmd;
+		if (shiftCmd.empty())
+		{
+			cmd = primaryCmd;
+		}
+		else
+		{
+			if (m_state.filter == Filter::SHIFTED) cmd = shiftCmd;
+			else cmd = primaryCmd;
+		}
+
+		// a command should pull the number off the entry line and enter it on the stack before
+		// executing a command, but only if it is valid
+		if (!m_state.currentInput.empty())
+		{
+			//if (state_.curInputValidity == QValidator::Acceptable)
+			{
+				onEnter();
+			}
+			////else
+			//{
+			//	emit parent_.errorDetected("Invalid input");
+			//	return;
+			//}
+		}
+
+		m_state.filter = Filter::UNSHIFTED;
+
+		// raise event
+		//emit parent_.modelChanged();
+		SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
+		//const TCHAR* cm = (TCHAR*)cmd;
+		// raise event
+		//emit parent_.commandEntered(cmd);
+		//SendMessage(parent, CALCM_COMMAND_ENTERED, (WPARAM)cmd, 0);
+
 	}
 	LRESULT CALLBACK GuiModelProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		switch (msg)
 		{
-		//case CALCM_CHARACTE_ENTERED:
-		//	GuiModel::onCharactedEntered(char(wParam));
+			//case CALCM_CHARACTE_ENTERED:
+			//	GuiModel::onCharactedEntered(char(wParam));
 			break;
 		default:
 			DefWindowProc(hwnd, msg, wParam, lParam);

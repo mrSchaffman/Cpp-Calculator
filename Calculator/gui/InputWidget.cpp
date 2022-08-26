@@ -2,8 +2,9 @@
 
 namespace view
 {
-	map<size_t, HWND>InputWidget::iGid = {};
-	HWND m_hwnd = NULL;
+	map<size_t, HWND>InputWidgetGuiId = {};
+	InputWidget inputWidger{};
+
 	CommandButton bt0;
 	CommandButton bt1;
 	CommandButton bt2;
@@ -32,55 +33,48 @@ namespace view
 	CommandButton btEex;
 	CommandButton btShift;
 
-	//UINT InputWidget::uCharacterEnteredMsg =0;
-	//UINT InputWidget::uCommandEnteredMsg=0;
-	//UINT InputWidget::uEnterPressedMsg=0;
-	//UINT InputWidget::uProcedurePressedMsg=0;
-	//UINT InputWidget::uShiftPressedMsg=0;
-	//UINT InputWidget::uPlusMinusMsg=0;
-
-	LRESULT InputWidget::InputWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+	LRESULT CALLBACK InputWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		// L 1
-		static 	Rect rU{ 5,5,BTN_WIDTH,BTN_HEIGH };
-		static 	Rect rR{ BTN_WIDTH + 5,5,BTN_WIDTH,BTN_HEIGH };
-		static 	Rect rP{ 2 * (BTN_WIDTH )+5,5,BTN_WIDTH,BTN_HEIGH };
+		Rect rU{ 5,5,BTN_WIDTH,BTN_HEIGH };
+		Rect rR{ BTN_WIDTH + 5,5,BTN_WIDTH,BTN_HEIGH };
+		Rect rP{ 2 * (BTN_WIDTH)+5,5,BTN_WIDTH,BTN_HEIGH };
 
 		// L 2
-		static 	Rect r4{ 5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r5{ BTN_WIDTH + 5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r6{ 2 * (BTN_WIDTH )+5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r7{ 3 * (BTN_WIDTH )+5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
+		Rect r4{ 5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
+		Rect r5{ BTN_WIDTH + 5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
+		Rect r6{ 2 * (BTN_WIDTH)+5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
+		Rect r7{ 3 * (BTN_WIDTH)+5,BTN_HEIGH + 5,BTN_WIDTH,BTN_HEIGH };
 
 		// L 3
-		static 	Rect r8{ 5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r9{ BTN_WIDTH + 5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r10{ 2 * (BTN_WIDTH )+5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r11{ 3 * (BTN_WIDTH )+5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r8{ 5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r9{ BTN_WIDTH + 5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r10{ 2 * (BTN_WIDTH)+5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r11{ 3 * (BTN_WIDTH)+5,2 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 
 		// L 4
-		static 	Rect r12{ 5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r13{ BTN_WIDTH + 5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r14{ 2 * (BTN_WIDTH )+5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r15{ 3 * (BTN_WIDTH )+5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r12{ 5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r13{ BTN_WIDTH + 5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r14{ 2 * (BTN_WIDTH)+5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r15{ 3 * (BTN_WIDTH)+5,3 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 
 		// L 5
-		static 	Rect r16{ 5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r17{ BTN_WIDTH + 5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r18{ 2 * (BTN_WIDTH )+5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r19{ 3 * (BTN_WIDTH)+5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r16{ 5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r17{ BTN_WIDTH + 5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r18{ 2 * (BTN_WIDTH)+5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r19{ 3 * (BTN_WIDTH)+5,4 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 
 		// L 6
-		static 	Rect r20{ 5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r21{ BTN_WIDTH + 5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r22{ 2 * (BTN_WIDTH )+5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r23{ 3 * (BTN_WIDTH )+5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r20{ 5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r21{ BTN_WIDTH + 5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r22{ 2 * (BTN_WIDTH)+5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r23{ 3 * (BTN_WIDTH)+5,5 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 
 		// L 7
-		static 	Rect r24{ 5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r25{ BTN_WIDTH + 5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r26{ 2 * (BTN_WIDTH) + 5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
-		static 	Rect r27{ 3 * (BTN_WIDTH) + 5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r24{ 5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r25{ BTN_WIDTH + 5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r26{ 2 * (BTN_WIDTH)+5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
+		Rect r27{ 3 * (BTN_WIDTH)+5,6 * (BTN_HEIGH + 5),BTN_WIDTH,BTN_HEIGH };
 
 
 		switch (uMsg)
@@ -96,6 +90,7 @@ namespace view
 			//uEnterPressedMsg = RegisterWindowMessage(L"Enter Pressed");
 			//uCommandEnteredMsg = RegisterWindowMessage(L"Command Pressed");
 			//CM_CHARACTE_ENTERED = RegisterWindowMessage(L"Character Pressed");
+			InputWidgetGuiId[INPUT_WIDGET_ID] = hwnd;
 
 			HRESULT hr1 = btUndo.Create(hwnd, L"Undo", BTN_UNDO, rU);
 			HRESULT hr2 = btRedo.Create(hwnd, L"Redo", BTN_REDO, rR);
@@ -131,77 +126,123 @@ namespace view
 			HRESULT hr26 = btPlusMinus.Create(hwnd, L"+/-", BTN_PLUS_MINUS, r26);
 			HRESULT hr27 = btPlus.Create(hwnd, L"+", BTN_PLUS, r27);
 
-			iGid[BTN_0] = bt0.getWindow();
-			iGid[BTN_1] = bt1.getWindow();
-			iGid[BTN_2] = bt2.getWindow();
-			iGid[BTN_3] = bt3.getWindow();
-			iGid[BTN_4] = bt4.getWindow();
-			iGid[BTN_5] = bt5.getWindow();
-			iGid[BTN_6] = bt6.getWindow();
-			iGid[BTN_7] = bt7.getWindow();
-			iGid[BTN_8] = bt8.getWindow();
-			iGid[BTN_9] = bt9.getWindow();
 
-			iGid[BTN_COMMA] = btComma.getWindow();
-			iGid[BTN_PLUS_MINUS] = btPlusMinus.getWindow();
-			iGid[BTN_PLUS] = btPlus.getWindow();
-			iGid[BTN_MINUS] = btMinus.getWindow();
-			iGid[BTN_MULTI] = btMulti.getWindow();
-			iGid[BTN_DIVIDE] = btDivide.getWindow();
+			InputWidgetGuiId[BTN_0] = bt0.getWindow();
+			InputWidgetGuiId[BTN_1] = bt1.getWindow();
+			InputWidgetGuiId[BTN_2] = bt2.getWindow();
+			InputWidgetGuiId[BTN_3] = bt3.getWindow();
+			InputWidgetGuiId[BTN_4] = bt4.getWindow();
+			InputWidgetGuiId[BTN_5] = bt5.getWindow();
+			InputWidgetGuiId[BTN_6] = bt6.getWindow();
+			InputWidgetGuiId[BTN_7] = bt7.getWindow();
+			InputWidgetGuiId[BTN_8] = bt8.getWindow();
+			InputWidgetGuiId[BTN_9] = bt9.getWindow();
 
-			iGid[BTN_SHIFT] = btShift.getWindow();
-			iGid[BTN_BKSP] = btBksp.getWindow();
-			iGid[BTN_EEX] = btEex.getWindow();
-			iGid[BTN_ENTER] = btEnter.getWindow();
-			iGid[BTN_POW] = btPow.getWindow();
-			iGid[BTN_TAN] = btTan.getWindow();
-			iGid[BTN_SIN] = btSin.getWindow();
-			iGid[BTN_COS] = btCos.getWindow();
+			InputWidgetGuiId[BTN_COMMA] = btComma.getWindow();
+			InputWidgetGuiId[BTN_PLUS_MINUS] = btPlusMinus.getWindow();
+			InputWidgetGuiId[BTN_PLUS] = btPlus.getWindow();
+			InputWidgetGuiId[BTN_MINUS] = btMinus.getWindow();
+			InputWidgetGuiId[BTN_MULTI] = btMulti.getWindow();
+			InputWidgetGuiId[BTN_DIVIDE] = btDivide.getWindow();
 
-			iGid[BTN_UNDO] = btUndo.getWindow();
-			iGid[BTN_REDO] = btRedo.getWindow();
-			iGid[BTN_PROC] = btProc.getWindow();
+			InputWidgetGuiId[BTN_SHIFT] = btShift.getWindow();
+			InputWidgetGuiId[BTN_BKSP] = btBksp.getWindow();
+			InputWidgetGuiId[BTN_EEX] = btEex.getWindow();
+			InputWidgetGuiId[BTN_ENTER] = btEnter.getWindow();
+			InputWidgetGuiId[BTN_POW] = btPow.getWindow();
+			InputWidgetGuiId[BTN_TAN] = btTan.getWindow();
+			InputWidgetGuiId[BTN_SIN] = btSin.getWindow();
+			InputWidgetGuiId[BTN_COS] = btCos.getWindow();
+
+			InputWidgetGuiId[BTN_UNDO] = btUndo.getWindow();
+			InputWidgetGuiId[BTN_REDO] = btRedo.getWindow();
+			InputWidgetGuiId[BTN_PROC] = btProc.getWindow();
 
 
 		}
-			return 0;
+		return 0;
 		case WM_COMMAND:
 		{
 			switch (LOWORD(wParam))
 			{
 
 			case BTN_0:
-				onZero();
+				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '0', 0);
 				break;
 			case BTN_1:
-				onOne();
+				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '1', 0);
 				break;
 			case BTN_2:
-				onTwo();
+				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '2', 0);
 				break;
 			case BTN_3:
-				onThree();
+				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '3', 0);
 				break;
 			case BTN_4:
-				onFour();
+				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '4', 0);
 				break;
 			case BTN_5:
-				onFive();
+				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '5', 0);
 				break;
 			case BTN_6:
-				onSix();
+				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '6', 0);
 				break;
 			case BTN_7:
-				onSeven();
+				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '7', 0);
 				break;
 			case BTN_8:
-				onEight();
+				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '8', 0);
 				break;
 			case BTN_9:
-				onNine();
+				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '9', 0);
 				break;
-			case BTN_SHIFT:
-				shiftPressed();
+			case BTN_COMMA:
+				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '.', 0);
+				break;
+			case BTN_EEX:
+				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, 'e', 0);
+				break;
+			case BTN_UNDO:
+				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"undo", 0);
+				break;
+			case BTN_REDO:
+				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"redo", 0);
+				break;
+			case BTN_POW:
+				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"pow", 0);
+				break;
+			case BTN_PLUS:
+				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"+", 0);
+				break;
+			case BTN_MINUS:
+				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"-", 0);
+				break;
+			case BTN_MULTI:
+				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"*", 0);
+				break;
+			case BTN_DIVIDE:
+				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"/", 0);
+				break;
+			case BTN_TAN:
+				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"tan", 0);
+				break;
+			case BTN_COS:
+				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"cos", 0);
+				break;
+			case BTN_SIN:
+				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"sin", 0);
+				break;
+			case BTN_PLUS_MINUS:
+				SendMessage(GetParent(hwnd), CALCM_PLUS_MINUS_PRESSED, 0, 0);
+				break;
+			case BTN_BKSP:
+				SendMessage(GetParent(hwnd), CALCM_BACKSPACE_ENTERED, 0, 0);
+				break;
+			case BTN_ENTER:
+				SendMessage(GetParent(hwnd), CALCM_ENTER_PRESSED, 0, 0);
+				break;
+			case BTN_PROC:
+				SendMessage(GetParent(hwnd), CALCM_PROCEDURE_PRESSED, 0, 0);
 				break;
 			default:
 				break;
@@ -303,10 +344,34 @@ namespace view
 
 	}
 
-
-	void InputWidget::shiftPressed()
+	void InputWidget::characterEntered(char c)
 	{
-		SendMessage(GetParent(m_hwnd), CALCM_SHIFT_PRESSED, 0, 0);
+	}
+
+	void InputWidget::enterPressed()
+	{
+	}
+
+	void InputWidget::backspacePressed()
+	{
+	}
+
+	void InputWidget::plusMinusPressed()
+	{
+	}
+
+	void InputWidget::commandEntered(std::string, std::string)
+	{
+	}
+
+
+	void shiftPressed()
+	{
+		SendMessage(GetParent(InputWidgetGuiId[INPUT_WIDGET_ID]), CALCM_SHIFT_PRESSED, 0, 0);
+	}
+
+	void InputWidget::procedurePressed()
+	{
 	}
 
 	void InputWidget::allocateButtons()
@@ -329,60 +394,4 @@ namespace view
 
 
 	}
-
-	void InputWidget::onEex()
-	{
-	}
-
-	void InputWidget::onDecimal()
-	{
-	}
-
-	void InputWidget::onPlusMinus()
-	{
-	}
-
-	void InputWidget::onZero()
-	{
-		HWND destWind = FindWindow(TEXT("GuiModel"), L"GuiModel");
-		//if (destWind)
-		//	//SendMessage(destWind, CALCM_CHARACTE_ENTERED, '0', 0);
-	}
-
-	void InputWidget::onOne()
-	{
-	}
-
-	void InputWidget::onTwo()
-	{
-	}
-
-	void InputWidget::onThree()
-	{
-	}
-
-	void InputWidget::onFour()
-	{
-	}
-
-	void InputWidget::onFive()
-	{
-	}
-
-	void InputWidget::onSix()
-	{
-	}
-
-	void InputWidget::onSeven()
-	{
-	}
-
-	void InputWidget::onEight()
-	{
-	}
-
-	void InputWidget::onNine()
-	{
-	}
-
 }

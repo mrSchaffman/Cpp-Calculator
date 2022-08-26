@@ -19,8 +19,9 @@ using std::string;
 
 namespace view {
 
-    enum WindowID
+    enum InputWidgetID
     {
+        INPUT_WIDGET_ID,
         BTN_0,
         BTN_1,
         BTN_2,
@@ -56,26 +57,23 @@ namespace view {
         LABEL_SWAP,
     };
 
+    LRESULT CALLBACK	InputWindowProc(HWND, UINT, WPARAM, LPARAM);
     class InputWidget
     {
     public:
-
-        explicit InputWidget(){}
+        explicit InputWidget() :m_hwnd{ NULL } {}
         ~InputWidget() = default;
 
-        static LRESULT CALLBACK	InputWindowProc(HWND, UINT, WPARAM, LPARAM);
         HRESULT Create(HWND hParent, int nID, const Rect& rcBound);
 
-        //HWND getWindow()const { return m_hwnd; }
+        HWND getWindow()const { return m_hwnd; }
 
-    //signals:
-    //    void characterEntered(char c);
-    //    void enterPressed();
-    //    void backspacePressed();
-    //    void plusMinusPressed();
-    //    void commandEntered(std::string, std::string);
-        static void shiftPressed();
-    //    void procedurePressed();
+        void characterEntered(char c);
+        void enterPressed();
+        void backspacePressed();
+        void plusMinusPressed();
+        void commandEntered(std::string, std::string);
+        void procedurePressed();
 
     private:
         void allocateButtons();
@@ -83,26 +81,9 @@ namespace view {
         void makeConnections();
         void layoutButtons();
 
-
     private:
-        static void onEex();
-        static void onDecimal();
-        static void onPlusMinus();
-        static void onZero();
-        static void onOne();
-        static void onTwo();
-        static void onThree();
-        static void onFour();
-        static void onFive();
-        static void onSix();
-        static void onSeven();
-        static void onEight();
-        static void onNine();
-
-    private:
-        static map<size_t, HWND>iGid;
+        HWND m_hwnd;
     };
-
 }
 
 #endif

@@ -26,8 +26,11 @@ namespace view
 		};
 
 		explicit GuiModel(HWND parent = NULL);
+		GuiModel() :guiModelHandle{ NULL }, parent{ NULL }, m_state{}{}
+
 		~GuiModel() = default;
 		HWND getWindow()const { return guiModelHandle; }
+		void setParent(HWND p) { parent = p; }
 
 		void stackChanged(const vector<double>& v);
 		const State& getState()const;
@@ -35,7 +38,7 @@ namespace view
 		void clearInput()const;
 		void onShift();
 
-	private:
+	public:
 		void onEnter();
 		void onCharactedEntered(char c);
 		void onBackspace();
