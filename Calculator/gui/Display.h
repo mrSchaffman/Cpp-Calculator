@@ -26,6 +26,7 @@ namespace view
 		HRESULT Create(HWND parent, int nID, int nLinesStack = 6, int minCharWide = 25);
 		HWND getWindow() const { return hwndDisplay; }
 		void setParent(HWND p) { parent = p; }
+		void showMessage(const std::string& m);
 
 	public:
 		void onModelChanged();

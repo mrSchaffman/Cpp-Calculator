@@ -17,7 +17,7 @@ namespace view
 			L"6:\n5:\n4:\n3:\n2:\n1:\n",
 			WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS,
 			5, 5,
-			250, 95,
+			250, 110,
 			parent,
 			(HMENU)(INT_PTR)nID,
 			GetModuleHandle(NULL),
@@ -29,6 +29,10 @@ namespace view
 		hwndDisplay = hwnd;
 		return S_OK;
 
+	}
+	void Display::showMessage(const std::string& m)
+	{
+		// set statusbar message...
 	}
 	void Display::onModelChanged()
 	{
@@ -51,7 +55,11 @@ namespace view
 		for (int i = start - 1; i > -1; --i)
 		{
 			bool valueExists = i < static_cast<int>(state.currentStack.size());
-			oss << createLine(i, (valueExists ? state.currentStack[i] : 0 /*dummy value*/), state.currentStack.size()) << (i != 0 ? "\n" : "");
+			oss << createLine(
+				i,
+				(valueExists ? state.currentStack[i] : 0 /*dummy value*/),
+				state.currentStack.size())
+				<< (i != 0 ? "\n" : "");
 		}
 
 		if (hasInput)
@@ -59,7 +67,11 @@ namespace view
 			oss << "\n"
 				<< state.currentInput;
 		}
-		SetWindowText(hwndDisplay, L"waiting for implementation!");
+		string vb = oss.str();
+		std::wstring wstr = std::wstring(vb.begin(), vb.end());
+		const wchar_t* v = wstr.c_str();
+
+		SetWindowText(hwndDisplay, v);
 
 	}
 	void Display::onSize()

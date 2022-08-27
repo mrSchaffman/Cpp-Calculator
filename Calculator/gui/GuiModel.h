@@ -32,9 +32,10 @@ namespace view
 		void setParent(HWND p) { parent = p; }
 
 		void stackChanged(const vector<double>& v);
+
 		const State& getState()const;
 		bool inputEmpty()const { return m_state.currentInput.empty(); }
-		void clearInput()const;
+		void clearInput();
 		void onShift();
 
 	public:

@@ -8,6 +8,7 @@
 #include"Display.h"
 #include"GuiModel.h"
 #include"CalculatorMessage.h"
+#include"UserInterface.h"
 #include<map>
 
 using std::map;
@@ -29,7 +30,7 @@ namespace view
 		DISPLAY,
 		GUI_MODEL
 	};
-	class MainWindow : public BaseWindow//,UserInterface
+	class MainWindow : public BaseWindow, public UserInterface
 	{
 	public:
 
@@ -39,8 +40,8 @@ namespace view
 		LPCTSTR WindowName() const override { return L"Calculator"; }
 		LPCTSTR MenuName() const override { return MAKEINTRESOURCE(IDC_APP_MENU); }
 
-		//void postMessage(const std::string& m) override;
-		//void stackChanged() override;
+		void displayMessage(const std::string& m) override;
+		void stackChanged() override;
 
 		void OnCreate();
 		void OnPaint() override;

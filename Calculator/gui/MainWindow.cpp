@@ -1,6 +1,6 @@
 #include "MainWindow.h"
 #include"CommandButton.h"
-
+#include"Stack.h"
 namespace view
 {
 	gid_map mainGuiId{};
@@ -16,7 +16,7 @@ namespace view
 		{
 			mainGuiId[MAIN_WINDOW] = m_hwnd;
 
-			Rect rc{ 5,105,250,245 };
+			Rect rc{ 5,120,250,245 };
 
 			model = new GuiModel{ m_hwnd };
 			inptWin = new InputWidget(m_hwnd, INPUT_WIDGET, rc);
@@ -52,7 +52,11 @@ namespace view
 		{
 			printf("command button press!");
 			const TCHAR* v = (TCHAR*)wParam;
-			// ::raise(UserInterface::CommandEntered, std::make_shared<CommandData>(cmd));
+			std::wstring wV = std::wstring(v);
+			std::string sCmd = std::string(wV.begin(), wV.end());
+			notify(UserInterface::CommandEntered, std::make_shared<UIEventData>(sCmd));
+			printf("command transmited to the Dispatcher!");
+
 		}break;
 		case CALCM_ENTER_PRESSED:
 		{
@@ -103,5 +107,16 @@ namespace view
 		EndPaint(m_hwnd, &ps);
 
 	}
+	void MainWindow::displayMessage(const std::string& m)
+	{
+		display->showMessage(m);
+	}
+	void MainWindow::stackChanged()
+	{
+		int nLinesStack = 6;
+		auto v = model::Stack::getInstance().getElements(nLinesStack);
+		model->stackChanged(v);
+	}
+
 
 }

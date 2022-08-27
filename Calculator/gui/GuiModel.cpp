@@ -30,16 +30,16 @@ namespace view
 	void GuiModel::stackChanged(const vector<double>& v)
 	{
 		m_state.currentStack = v;
-		//SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
+		SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
 	}
 	const GuiModel::State& GuiModel::getState() const
 	{
 		return m_state;
 	}
-	void GuiModel::clearInput() const
+	void GuiModel::clearInput()
 	{
-		//m_state.currentInput.{""};
-		//SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
+		m_state.currentInput.clear();
+		SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
 	}
 	void GuiModel::onShift()
 	{
@@ -55,8 +55,9 @@ namespace view
 			onCommandEntered("dup", "swap");
 		else
 		{
+			string tmp{ m_state.currentInput };
 			clearInput();
-			onCommandEntered(m_state.currentInput, "");
+			onCommandEntered(tmp, "");
 		}
 	}
 	void GuiModel::onCharactedEntered(char c)
@@ -144,10 +145,12 @@ namespace view
 		// raise event
 		//emit parent_.modelChanged();
 		SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
-		//const TCHAR* cm = (TCHAR*)cmd;
+		std::wstring wCmd = std::wstring(cmd.begin(), cmd.end());
+		const wchar_t* v = wCmd.c_str();
+
 		// raise event
 		//emit parent_.commandEntered(cmd);
-		//SendMessage(parent, CALCM_COMMAND_ENTERED, (WPARAM)cmd, 0);
+		SendMessage(parent, CALCM_COMMAND_ENTERED, (WPARAM)v, 0);
 
 	}
 	LRESULT CALLBACK GuiModelProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -159,8 +162,7 @@ namespace view
 			break;
 		default:
 			DefWindowProc(hwnd, msg, wParam, lParam);
-			break;
+			return 0;
 		}
-		return E_NOTIMPL;
 	}
 }
