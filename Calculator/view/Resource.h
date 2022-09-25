@@ -57,4 +57,4 @@
 #define IDC_BT_COS			500
 #define IDC_BT_SIN			501
 #define IDC_BT_TAN			502
-#define IDC_BT_COMMA		503
+

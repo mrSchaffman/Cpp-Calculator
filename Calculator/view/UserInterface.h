@@ -26,6 +26,7 @@
 #define USER_INTERFACE_H
 
 #include"Publisher.h"
+
 namespace view
 {
 	class UserInterface : public utility::Publisher
