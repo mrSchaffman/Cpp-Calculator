@@ -47,7 +47,6 @@ namespace view
 			m_state.filter = Filter::SHIFTED;
 		else
 			m_state.filter = Filter::UNSHIFTED;
-		SendMessage(parent, CALCM_MODEL_CHANGED, 0, 0);
 	}
 	void GuiModel::onEnter()
 	{

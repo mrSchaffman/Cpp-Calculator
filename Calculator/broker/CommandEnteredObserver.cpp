@@ -26,7 +26,9 @@
 #include"UserInterfaceEventData.h"
 namespace broker
 {
-	CommandEnteredObserver::CommandEnteredObserver(controller::Dispatcher & disp):Observer{ "CommandEnteredObserver" },m_d{ disp }
+	CommandEnteredObserver::CommandEnteredObserver(controller::Dispatcher & disp)
+		:Observer{ "CommandEnteredObserver" },
+		m_d{ disp }
 	{
 	}
 	void CommandEnteredObserver::notifyImpl(std::shared_ptr<utility::EventData> d)

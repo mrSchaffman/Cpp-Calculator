@@ -84,12 +84,6 @@ namespace view
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
 		case WM_CREATE:
 		{
-			//uPlusMinusMsg = RegisterWindowMessage(L"Plus Minus Pressed");
-			//uShiftPressedMsg = RegisterWindowMessage(L"Shift Pressed");
-			//uProcedurePressedMsg = RegisterWindowMessage(L"Procedure Pressed");
-			//uEnterPressedMsg = RegisterWindowMessage(L"Enter Pressed");
-			//uCommandEnteredMsg = RegisterWindowMessage(L"Command Pressed");
-			//CM_CHARACTE_ENTERED = RegisterWindowMessage(L"Character Pressed");
 			InputWidgetGuiId[INPUT_WIDGET_ID] = hwnd;
 
 			HRESULT hr1 = btUndo.Create(hwnd, L"Undo", BTN_UNDO, rU);
@@ -125,40 +119,6 @@ namespace view
 			HRESULT hr25 = btComma.Create(hwnd, L".", BTN_COMMA, r25);
 			HRESULT hr26 = btPlusMinus.Create(hwnd, L"+/-", BTN_PLUS_MINUS, r26);
 			HRESULT hr27 = btPlus.Create(hwnd, L"+", BTN_PLUS, r27);
-
-
-			InputWidgetGuiId[BTN_0] = bt0.getWindow();
-			InputWidgetGuiId[BTN_1] = bt1.getWindow();
-			InputWidgetGuiId[BTN_2] = bt2.getWindow();
-			InputWidgetGuiId[BTN_3] = bt3.getWindow();
-			InputWidgetGuiId[BTN_4] = bt4.getWindow();
-			InputWidgetGuiId[BTN_5] = bt5.getWindow();
-			InputWidgetGuiId[BTN_6] = bt6.getWindow();
-			InputWidgetGuiId[BTN_7] = bt7.getWindow();
-			InputWidgetGuiId[BTN_8] = bt8.getWindow();
-			InputWidgetGuiId[BTN_9] = bt9.getWindow();
-
-			InputWidgetGuiId[BTN_COMMA] = btComma.getWindow();
-			InputWidgetGuiId[BTN_PLUS_MINUS] = btPlusMinus.getWindow();
-			InputWidgetGuiId[BTN_PLUS] = btPlus.getWindow();
-			InputWidgetGuiId[BTN_MINUS] = btMinus.getWindow();
-			InputWidgetGuiId[BTN_MULTI] = btMulti.getWindow();
-			InputWidgetGuiId[BTN_DIVIDE] = btDivide.getWindow();
-
-			InputWidgetGuiId[BTN_SHIFT] = btShift.getWindow();
-			InputWidgetGuiId[BTN_BKSP] = btBksp.getWindow();
-			InputWidgetGuiId[BTN_EEX] = btEex.getWindow();
-			InputWidgetGuiId[BTN_ENTER] = btEnter.getWindow();
-			InputWidgetGuiId[BTN_POW] = btPow.getWindow();
-			InputWidgetGuiId[BTN_TAN] = btTan.getWindow();
-			InputWidgetGuiId[BTN_SIN] = btSin.getWindow();
-			InputWidgetGuiId[BTN_COS] = btCos.getWindow();
-
-			InputWidgetGuiId[BTN_UNDO] = btUndo.getWindow();
-			InputWidgetGuiId[BTN_REDO] = btRedo.getWindow();
-			InputWidgetGuiId[BTN_PROC] = btProc.getWindow();
-
-
 		}
 		return 0;
 		case WM_COMMAND:
@@ -168,90 +128,88 @@ namespace view
 
 			case BTN_0:
 				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '0', 0);
-				break;
+				return 0;
 			case BTN_1:
 				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '1', 0);
-				break;
+				return 0;
 			case BTN_2:
 				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '2', 0);
-				break;
+				return 0;
 			case BTN_3:
 				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '3', 0);
-				break;
+				return 0;
 			case BTN_4:
 				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '4', 0);
-				break;
+				return 0;
 			case BTN_5:
 				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '5', 0);
-				break;
+				return 0;
 			case BTN_6:
 				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '6', 0);
-				break;
+				return 0;
 			case BTN_7:
 				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '7', 0);
 				break;
 			case BTN_8:
 				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '8', 0);
-				break;
+				return 0;
 			case BTN_9:
 				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '9', 0);
-				break;
+				return 0;
 			case BTN_COMMA:
 				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, '.', 0);
-				break;
+				return 0;
 			case BTN_EEX:
 				SendMessage(GetParent(hwnd), CALCM_CHARACTER_ENTERED, 'e', 0);
-				break;
+				return 0;
 			case BTN_UNDO:
 				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"undo", 0);
-				break;
+				return 0;
 			case BTN_REDO:
 				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"redo", 0);
-				break;
+				return 0;
 			case BTN_POW:
 				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"pow", 0);
-				break;
+				return 0;
 			case BTN_PLUS:
 				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"+", 0);
-				break;
+				return 0;
 			case BTN_MINUS:
 				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"-", 0);
-				break;
+				return 0;
 			case BTN_MULTI:
 				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"*", 0);
-				break;
+				return 0;
 			case BTN_DIVIDE:
 				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"/", 0);
-				break;
+				return 0;
 			case BTN_TAN:
 				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"tan", 0);
-				break;
+				return 0;
 			case BTN_COS:
 				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"cos", 0);
-				break;
+				return 0;
 			case BTN_SIN:
 				SendMessage(GetParent(hwnd), CALCM_COMMAND_ENTERED, (WPARAM)L"sin", 0);
-				break;
+				return 0;
 			case BTN_PLUS_MINUS:
 				SendMessage(GetParent(hwnd), CALCM_PLUS_MINUS_PRESSED, 0, 0);
-				break;
+				return 0;
 			case BTN_BKSP:
-				SendMessage(GetParent(hwnd), CALCM_BACKSPACE_ENTERED, 0, 0);
-				break;
+				//SendMessage(GetParent(hwnd), CALCM_BACKSPACE_ENTERED, 0, 0);
+				return 0;
 			case BTN_ENTER:
 				SendMessage(GetParent(hwnd), CALCM_ENTER_PRESSED, 0, 0);
-				break;
+				return 0;
 			case BTN_PROC:
 				SendMessage(GetParent(hwnd), CALCM_PROCEDURE_PRESSED, 0, 0);
-				break;
+				return 0;
 			case BTN_SHIFT:
 				SendMessage(GetParent(hwnd), CALCM_SHIFT_PRESSED, 0, 0);
-				break;
-			default:
-				break;
+				return 0;
 			}
 		}
-		break;
+		return 0;
 		default:
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
 		}

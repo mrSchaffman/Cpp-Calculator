@@ -30,10 +30,10 @@ namespace view
 		model{m},
 		parent{p}
 	{
-		CreateWindowEx(
+		HWND hwnd = CreateWindowEx(
 			0,
-			"EDIT",
-			"Display",
+			L"EDIT",
+			L"Display",
 			WS_CHILD | WS_VISIBLE,
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,

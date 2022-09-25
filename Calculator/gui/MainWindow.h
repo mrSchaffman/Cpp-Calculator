@@ -35,16 +35,18 @@ namespace view
 	public:
 
 	private:
+		void displayMessage(const std::string& m) override;
+		void stackChanged() override;
+
+	private:
+		void OnCreate();
+		void OnPaint() override;
+
 		LRESULT OnReceiveMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 		LPCTSTR  ClassName() const override { return L"Main Window Class"; }
 		LPCTSTR WindowName() const override { return L"Calculator"; }
 		LPCTSTR MenuName() const override { return MAKEINTRESOURCE(IDC_APP_MENU); }
 
-		void displayMessage(const std::string& m) override;
-		void stackChanged() override;
-
-		void OnCreate();
-		void OnPaint() override;
 	private:
 		InputWidget* inptWin;
 		GuiModel* model;

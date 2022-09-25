@@ -115,7 +115,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Software_Development\Cpp-Calculator\Calculator\model;E:\Software_Development\Cpp-Calculator\Calculator\utility;E:\Software_Development\Cpp-Calculator\Calculator\view;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\BFA2\Desktop\Cpp\Dev\Git\Cpp-Calculator\Calculator\view;C:\Users\BFA2\Desktop\Cpp\Dev\Git\Cpp-Calculator\Calculator\MODEL;C:\Users\BFA2\Desktop\Cpp\Dev\Git\Cpp-Calculator\Calculator\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,7 +127,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Software_Development\Cpp-Calculator\Calculator\model;E:\Software_Development\Cpp-Calculator\Calculator\utility;E:\Software_Development\Cpp-Calculator\Calculator\view;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\BFA2\Desktop\Cpp\Dev\Git\Cpp-Calculator\Calculator\view;C:\Users\BFA2\Desktop\Cpp\Dev\Git\Cpp-Calculator\Calculator\MODEL;C:\Users\BFA2\Desktop\Cpp\Dev\Git\Cpp-Calculator\Calculator\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,7 +141,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Software_Development\Cpp-Calculator\Calculator\model;E:\Software_Development\Cpp-Calculator\Calculator\utility;E:\Software_Development\Cpp-Calculator\Calculator\view;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\BFA2\Desktop\Cpp\Dev\Git\Cpp-Calculator\Calculator\view;C:\Users\BFA2\Desktop\Cpp\Dev\Git\Cpp-Calculator\Calculator\MODEL;C:\Users\BFA2\Desktop\Cpp\Dev\Git\Cpp-Calculator\Calculator\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,7 +157,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Software_Development\Cpp-Calculator\Calculator\model;E:\Software_Development\Cpp-Calculator\Calculator\utility;E:\Software_Development\Cpp-Calculator\Calculator\view;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\BFA2\Desktop\Cpp\Dev\Git\Cpp-Calculator\Calculator\view;C:\Users\BFA2\Desktop\Cpp\Dev\Git\Cpp-Calculator\Calculator\MODEL;C:\Users\BFA2\Desktop\Cpp\Dev\Git\Cpp-Calculator\Calculator\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

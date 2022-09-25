@@ -88,6 +88,7 @@ namespace view {
     private:
         HWND m_hwnd;
     };
+
 }
 
 #endif
