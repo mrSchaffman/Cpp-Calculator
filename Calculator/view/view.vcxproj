@@ -160,7 +160,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Display.h" />
-    <ClInclude Include="framework.h" />
     <ClInclude Include="GraphicalUserInterface.h" />
     <ClInclude Include="GraphicalUserInterfaceController.h" />
     <ClInclude Include="GraphicalUserInterfaceModel.h" />
