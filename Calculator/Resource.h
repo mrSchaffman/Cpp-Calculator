@@ -12,8 +12,6 @@
 #define IDC_STATIC				-1
 #endif
 
-
-
 #define IDC_APP_MENU			109
 
 #define IDM_REGISTER			200
