@@ -31,7 +31,7 @@
 *.out
 *.app
 *.vs
- .vcxproj
+*.vcxproj
 *.vcxproj.filters
 
 # build

@@ -24,6 +24,7 @@
 #ifndef STATE_DATA_H
 #define STATE_DATA_H
 #include<vector>
+#include<string>
 #include"EventData.h"
 namespace view
 {
