@@ -67,7 +67,6 @@ private:
     HWND m_hwnd;
 	string m_primaryCmd;
 	string m_shftCmd;
-
 };
 
 HINSTANCE	GetInstance();

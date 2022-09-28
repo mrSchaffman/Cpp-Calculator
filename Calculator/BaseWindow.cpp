@@ -44,7 +44,7 @@ namespace view
 				0,
 				ClassName(),
 				WindowName(),
-				WS_OVERLAPPED | WS_BORDER | WS_CAPTION,
+				WS_OVERLAPPEDWINDOW | WS_BORDER | WS_CAPTION,
 				CW_USEDEFAULT, 0, 
 				275, 440,
 				NULL,
